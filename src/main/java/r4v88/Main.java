@@ -7,6 +7,7 @@ import r4v88.model.enums.Gender;
 public class Main {
     public static void main(String[] args) {
         User user = new User.Builder()
+                .setId(1290)
                 .setName("tak")
                 .setLastname("nie")
                 .setLogin("wacek")
@@ -19,6 +20,7 @@ public class Main {
     }
 
     Book book = new Book.Builder()
+            .setId(1234234)
             .setTitle("title")
             .setAuthorName("Name")
             .setAuthorLastname("Lastname")
