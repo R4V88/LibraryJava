@@ -1,6 +1,9 @@
 package r4v88.model;
 
+import org.apache.maven.lifecycle.internal.BuildListCalculator;
+
 public class Book {
+    private long id;
     private String title;
     private String authorName;
     private String authorLastname;
@@ -8,7 +11,8 @@ public class Book {
     private String publishingHouse;
     private String year;
 
-    private Book(String title, String authorName, String authorLastname, String isbn, String publishingHouse, String year) {
+    private Book(long id, String title, String authorName, String authorLastname, String isbn, String publishingHouse, String year) {
+        this.id = id;
         this.title = title;
         this.authorName = authorName;
         this.authorLastname = authorLastname;
@@ -18,6 +22,7 @@ public class Book {
     }
 
     public static class Builder {
+        private long id;
         private String title;
         private String authorName;
         private String authorLastname;
@@ -26,6 +31,11 @@ public class Book {
         private String year;
 
         public Builder() {
+        }
+
+        public Builder setId(long id){
+            this.id = id;
+            return this;
         }
 
         public Builder setTitle(String title) {
@@ -59,8 +69,12 @@ public class Book {
         }
 
         public Book build() {
-            return new Book(title, authorName, authorLastname, isbn, publishingHouse, year);
+            return new Book(id, title, authorName, authorLastname, isbn, publishingHouse, year);
         }
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getTitle() {

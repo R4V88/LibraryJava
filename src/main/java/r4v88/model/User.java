@@ -4,6 +4,7 @@ import r4v88.model.enums.Gender;
 
 public class User {
 
+    private long id;
     private String name;
     private String lastname;
     private String login;
@@ -12,7 +13,8 @@ public class User {
     private Gender gender;
     private String dateOfBirth;
 
-    private User(String name, String lastname, String login, String email, String password, Gender gender, String dateOfBirth) {
+    private User(long id, String name, String lastname, String login, String email, String password, Gender gender, String dateOfBirth) {
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.login = login;
@@ -24,6 +26,7 @@ public class User {
 
     public static class Builder {
 
+        private long id;
         private String name;
         private String lastname;
         private String login;
@@ -47,6 +50,11 @@ public class User {
 //        }
 
         public Builder() {
+        }
+
+        public Builder setId(long id) {
+            this.id = id;
+            return this;
         }
 
         public Builder setName(String name) {
@@ -86,8 +94,12 @@ public class User {
         }
 
         public User build() {
-            return new User(name, lastname, login, email, password, gender, dateOfBirth);
+            return new User(id, name, lastname, login, email, password, gender, dateOfBirth);
         }
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getName() {
@@ -121,13 +133,16 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
-                ", gender='" + gender + '\'' +
                 ", password='" + password + '\'' +
+                ", gender=" + gender +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 '}';
     }
+
+
 }
