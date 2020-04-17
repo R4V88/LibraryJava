@@ -6,18 +6,85 @@ public class User {
     private String lastname;
     private String login;
     private String email;
-    private String gender;
     private String password;
+    private String gender;
     private String dateOfBirth;
 
-    public User(String name, String lastname, String login, String email, String gender, String password, String dateOfBirth) {
+    private User(String name, String lastname, String login, String email, String password, String gender, String dateOfBirth) {
         this.name = name;
         this.lastname = lastname;
         this.login = login;
         this.email = email;
-        this.gender = gender;
         this.password = password;
+        this.gender = gender;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public static class Builder {
+        private String name;
+        private String lastname;
+        private String login;
+        private String email;
+        private String password;
+        private String gender;
+        private String dateOfBirth;
+
+        /*
+            Konstruktor parametrowy nie ma sensu bo w ten sposob wprowadzamy parametry jak bezposrednio w konstruktorze
+            parametryzowanym dla klasy.
+        */
+//        public Builder(String name, String lastname, String login, String email, String password, String gender, String dateOfBirth) {
+//            this.name = name;
+//            this.lastname = lastname;
+//            this.login = login;
+//            this.email = email;
+//            this.password = password;
+//            this.gender = gender;
+//            this.dateOfBirth = dateOfBirth;
+//        }
+
+        public Builder() {
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setLastname(String lastname) {
+            this.lastname = lastname;
+            return this;
+        }
+
+        public Builder setLogin(String login) {
+            this.login = login;
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder setGender(String gender) {
+            this.gender = gender;
+            return this;
+
+        }
+
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder setDateOfBirth(String dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+            return this;
+        }
+
+        public User build() {
+            return new User(name, lastname, login, email, password, gender, dateOfBirth);
+        }
     }
 
     public String getName() {
