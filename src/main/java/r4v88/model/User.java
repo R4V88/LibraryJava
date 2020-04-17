@@ -1,5 +1,7 @@
 package r4v88.model;
 
+import r4v88.model.enums.Gender;
+
 public class User {
 
     private String name;
@@ -7,10 +9,10 @@ public class User {
     private String login;
     private String email;
     private String password;
-    private String gender;
+    private Gender gender;
     private String dateOfBirth;
 
-    private User(String name, String lastname, String login, String email, String password, String gender, String dateOfBirth) {
+    private User(String name, String lastname, String login, String email, String password, Gender gender, String dateOfBirth) {
         this.name = name;
         this.lastname = lastname;
         this.login = login;
@@ -21,12 +23,13 @@ public class User {
     }
 
     public static class Builder {
+
         private String name;
         private String lastname;
         private String login;
         private String email;
         private String password;
-        private String gender;
+        private Gender gender;
         private String dateOfBirth;
 
         /*
@@ -66,7 +69,7 @@ public class User {
             return this;
         }
 
-        public Builder setGender(String gender) {
+        public Builder setGender(Gender gender) {
             this.gender = gender;
             return this;
 
@@ -103,7 +106,7 @@ public class User {
         return email;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
