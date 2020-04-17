@@ -1,5 +1,6 @@
 package r4v88;
 
+import r4v88.model.Book;
 import r4v88.model.User;
 import r4v88.model.enums.Gender;
 
@@ -16,4 +17,13 @@ public class Main {
                 .build();
 
     }
+
+    Book book = new Book.Builder()
+            .setTitle("title")
+            .setAuthorName("Name")
+            .setAuthorLastname("Lastname")
+            .setIsbn("123124123")
+            .setPublishingHouse("YES")
+            .setYear("12398")
+            .build();
 }
