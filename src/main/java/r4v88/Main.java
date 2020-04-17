@@ -2,6 +2,7 @@ package r4v88;
 
 import r4v88.model.Book;
 import r4v88.model.User;
+import r4v88.model.enums.BookType;
 import r4v88.model.enums.Gender;
 
 public class Main {
@@ -27,5 +28,6 @@ public class Main {
             .setIsbn("123124123")
             .setPublishingHouse("YES")
             .setYear("12398")
+            .setBookType(BookType.COMEDY)
             .build();
 }

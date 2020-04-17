@@ -1,6 +1,7 @@
 package r4v88.model;
 
 import org.apache.maven.lifecycle.internal.BuildListCalculator;
+import r4v88.model.enums.BookType;
 
 public class Book {
     private long id;
@@ -10,8 +11,9 @@ public class Book {
     private String isbn;
     private String publishingHouse;
     private String year;
+    private BookType bookType;
 
-    private Book(long id, String title, String authorName, String authorLastname, String isbn, String publishingHouse, String year) {
+    private Book(long id, String title, String authorName, String authorLastname, String isbn, String publishingHouse, String year, BookType bookType) {
         this.id = id;
         this.title = title;
         this.authorName = authorName;
@@ -19,6 +21,7 @@ public class Book {
         this.isbn = isbn;
         this.publishingHouse = publishingHouse;
         this.year = year;
+        this.bookType = bookType;
     }
 
     public static class Builder {
@@ -29,6 +32,7 @@ public class Book {
         private String isbn;
         private String publishingHouse;
         private String year;
+        private BookType bookType;
 
         public Builder() {
         }
@@ -68,8 +72,13 @@ public class Book {
             return this;
         }
 
+        public Builder setBookType(BookType bookType) {
+            this.bookType = bookType;
+            return this;
+        }
+
         public Book build() {
-            return new Book(id, title, authorName, authorLastname, isbn, publishingHouse, year);
+            return new Book(id, title, authorName, authorLastname, isbn, publishingHouse, year, bookType);
         }
     }
 
@@ -99,5 +108,9 @@ public class Book {
 
     public String getYear() {
         return year;
+    }
+
+    public BookType getBookType() {
+        return bookType;
     }
 }
