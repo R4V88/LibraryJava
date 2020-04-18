@@ -6,18 +6,14 @@ import r4v88.model.enums.BookType;
 public class Book {
     private long id;
     private String title;
-    private String authorName;
-    private String authorLastname;
     private String isbn;
     private String publishingHouse;
     private String year;
     private BookType bookType;
 
-    private Book(long id, String title, String authorName, String authorLastname, String isbn, String publishingHouse, String year, BookType bookType) {
+    private Book(long id, String title, String isbn, String publishingHouse, String year, BookType bookType) {
         this.id = id;
         this.title = title;
-        this.authorName = authorName;
-        this.authorLastname = authorLastname;
         this.isbn = isbn;
         this.publishingHouse = publishingHouse;
         this.year = year;
@@ -27,8 +23,6 @@ public class Book {
     public static class Builder {
         private long id;
         private String title;
-        private String authorName;
-        private String authorLastname;
         private String isbn;
         private String publishingHouse;
         private String year;
@@ -44,16 +38,6 @@ public class Book {
 
         public Builder setTitle(String title) {
             this.title = title;
-            return this;
-        }
-
-        public Builder setAuthorName(String authorName) {
-            this.authorName = authorName;
-            return this;
-        }
-
-        public Builder setAuthorLastname(String authorLastname) {
-            this.authorLastname = authorLastname;
             return this;
         }
 
@@ -78,7 +62,7 @@ public class Book {
         }
 
         public Book build() {
-            return new Book(id, title, authorName, authorLastname, isbn, publishingHouse, year, bookType);
+            return new Book(id, title, isbn, publishingHouse, year, bookType);
         }
     }
 
@@ -88,14 +72,6 @@ public class Book {
 
     public String getTitle() {
         return title;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public String getAuthorLastname() {
-        return authorLastname;
     }
 
     public String getIsbn() {
