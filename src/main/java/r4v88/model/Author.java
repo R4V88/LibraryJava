@@ -1,31 +1,39 @@
 package r4v88.model;
 
 public class Author {
-    private String authorName;
-    private String authorLastname;
+    private long id;
+    private String name;
+    private String lastname;
     private String dateOfBirth;
 
-    private Author(String authorName, String authorLastname, String dateOfBirth) {
-        this.authorName = authorName;
-        this.authorLastname = authorLastname;
+    private Author(long id, String name, String lastname, String dateOfBirth) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
         this.dateOfBirth = dateOfBirth;
     }
 
     public static class Builder {
-        private String authorName;
-        private String authorLastname;
+        private long id;
+        private String name;
+        private String lastname;
         private String dateOfBirth;
 
         public Builder() {
         }
 
-        public Builder setAuthorName(String authorName) {
-            this.authorName = authorName;
+        public Builder setId(long id) {
+            this.id = id;
             return this;
         }
 
-        public Builder setAuthorLastName(String authorLastname) {
-            this.authorLastname = authorLastname;
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setLastname(String lastname) {
+            this.lastname = lastname;
             return this;
         }
 
@@ -35,17 +43,21 @@ public class Author {
         }
 
         public Author build() {
-            return new Author(authorName, authorLastname, dateOfBirth);
+            return new Author(id, name, lastname, dateOfBirth);
         }
 
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public long getId() {
+        return id;
     }
 
-    public String getAuthorLastname() {
-        return authorLastname;
+    public String getName() {
+        return name;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     public String getDateOfBirth() {

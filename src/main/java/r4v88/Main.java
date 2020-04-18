@@ -29,8 +29,9 @@ public class Main {
                 .build();
 
         Author author = new Author.Builder()
-                .setAuthorName("Name")
-                .setAuthorLastName("LastName")
+                .setId(123123)
+                .setName("Name")
+                .setLastname("LastName")
                 .setDateOfBirth("19.19.19")
                 .build();
 
