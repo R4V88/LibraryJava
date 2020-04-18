@@ -1,38 +1,29 @@
 package r4v88.model;
 
-import r4v88.model.enums.Gender;
-
 public class User {
 
-    private long id;
     private String name;
     private String lastname;
     private String login;
     private String email;
     private String password;
-    private Gender gender;
     private String dateOfBirth;
 
-    private User(long id, String name, String lastname, String login, String email, String password, Gender gender, String dateOfBirth) {
-        this.id = id;
+    private User(String name, String lastname, String login, String email, String password, String dateOfBirth) {
         this.name = name;
         this.lastname = lastname;
         this.login = login;
         this.email = email;
         this.password = password;
-        this.gender = gender;
         this.dateOfBirth = dateOfBirth;
     }
 
     public static class Builder {
-
-        private long id;
         private String name;
         private String lastname;
         private String login;
         private String email;
         private String password;
-        private Gender gender;
         private String dateOfBirth;
 
         /*
@@ -50,11 +41,6 @@ public class User {
 //        }
 
         public Builder() {
-        }
-
-        public Builder setId(long id) {
-            this.id = id;
-            return this;
         }
 
         public Builder setName(String name) {
@@ -77,12 +63,6 @@ public class User {
             return this;
         }
 
-        public Builder setGender(Gender gender) {
-            this.gender = gender;
-            return this;
-
-        }
-
         public Builder setPassword(String password) {
             this.password = password;
             return this;
@@ -94,12 +74,8 @@ public class User {
         }
 
         public User build() {
-            return new User(id, name, lastname, login, email, password, gender, dateOfBirth);
+            return new User(name, lastname, login, email, password, dateOfBirth);
         }
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getName() {
@@ -118,10 +94,6 @@ public class User {
         return email;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -133,13 +105,11 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", gender=" + gender +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 '}';
     }

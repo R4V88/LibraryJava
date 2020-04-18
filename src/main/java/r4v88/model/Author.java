@@ -6,25 +6,18 @@ public class Author {
     private String lastname;
     private String dateOfBirth;
 
-    private Author(long id, String name, String lastname, String dateOfBirth) {
-        this.id = id;
+    private Author(String name, String lastname, String dateOfBirth) {
         this.name = name;
         this.lastname = lastname;
         this.dateOfBirth = dateOfBirth;
     }
 
     public static class Builder {
-        private long id;
         private String name;
         private String lastname;
         private String dateOfBirth;
 
         public Builder() {
-        }
-
-        public Builder setId(long id) {
-            this.id = id;
-            return this;
         }
 
         public Builder setName(String name) {
@@ -43,7 +36,7 @@ public class Author {
         }
 
         public Author build() {
-            return new Author(id, name, lastname, dateOfBirth);
+            return new Author(name, lastname, dateOfBirth);
         }
 
     }
@@ -62,5 +55,15 @@ public class Author {
 
     public String getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                '}';
     }
 }
