@@ -1,11 +1,13 @@
 package r4v88;
 
 import r4v88.api.UserDao;
+import r4v88.api.UserService;
 import r4v88.dao.UserDaoImpl;
 import r4v88.model.Author;
 import r4v88.model.Book;
 import r4v88.model.User;
 import r4v88.model.enums.Type;
+import r4v88.service.UserServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,10 +36,17 @@ public class Main {
                 .setDateOfBirth("19.19.19")
                 .build();
 
-        UserDao userDao = UserDaoImpl.getInstance();
-        userDao.saveUser(user);
+//        UserDao userDao = UserDaoImpl.getInstance();
+//        userDao.saveUser(user);
+//
+//        userDao.updateUser(user, 1);
 
-        userDao.updateUser(user, 1);
+        UserService userService = UserServiceImpl.getInstance();
+        System.out.println(userService.getUserById(1).toString());
+        System.out.println(userService.getUserByNameAndLastname("tak", "nie"));
+        userService.updateUserName("Karol", 1);
+        System.out.println(userService.getUserById(1).toString());
+
 
     }
 }
