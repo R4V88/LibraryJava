@@ -11,13 +11,22 @@ import r4v88.service.UserServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        User user = new User.Builder()
+        User wacek = new User.Builder()
                 .setName("tak")
                 .setLastname("nie")
                 .setLogin("wacek")
                 .setPassword("placek321")
                 .setDateOfBirth("11.22.3333")
                 .setEmail("email@gmail.mail")
+                .build();
+
+        User marek = new User.Builder()
+                .setName("marek")
+                .setLastname("jest")
+                .setLogin("mare")
+                .setPassword("admin1")
+                .setDateOfBirth("11.22.3334")
+                .setEmail("email@dzimejl.mail")
                 .build();
 
         Book book = new Book.Builder()
@@ -46,6 +55,8 @@ public class Main {
         System.out.println(userService.getUserByNameAndLastname("tak", "nie"));
         userService.updateUserName("Karol", 1);
         System.out.println(userService.getUserById(1).toString());
+        userService.createUser(marek);
+        System.out.println(userService.getUserByNameAndLastname("marek", "jest"));
 
 
     }

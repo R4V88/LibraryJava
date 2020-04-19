@@ -20,16 +20,18 @@ public class UserServiceImpl implements UserService {
         return UserServiceImpl.instance;
     }
 
-    private Map<Integer, User> getUsersMap() {
+
+    @Override
+    public Map<Long, User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
     @Override
     public User getUserById(long id) {
         User user = null;
-        Map<Integer, User> usersMap = getUsersMap();
+        Map<Long, User> usersMap = getAllUsers();
 
-        for (Map.Entry<Integer, User> users : usersMap.entrySet()) {
+        for (Map.Entry<Long, User> users : usersMap.entrySet()) {
             if (id == users.getKey()) {
                 user = users.getValue();
             }
@@ -40,9 +42,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByNameAndLastname(String name, String lastname) {
         User user = null;
-        Map<Integer, User> usersMap = getUsersMap();
+        Map<Long, User> usersMap = getAllUsers();
 
-        for (Map.Entry<Integer, User> users : usersMap.entrySet()) {
+        for (Map.Entry<Long, User> users : usersMap.entrySet()) {
             if (name.equals(users.getValue().getName()) && lastname.equals(users.getValue().getLastname())) {
                 user = users.getValue();
                 return user;
@@ -54,9 +56,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByEmail(String email) {
         User user = null;
-        Map<Integer, User> userMap = getUsersMap();
+        Map<Long, User> userMap = getAllUsers();
 
-        for (Map.Entry<Integer, User> userEntry : userMap.entrySet()) {
+        for (Map.Entry<Long, User> userEntry : userMap.entrySet()) {
             if (email.equals(userEntry.getValue().getEmail())) {
                 user = userEntry.getValue();
                 return user;
@@ -68,8 +70,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByLogin(String login) {
         User user = null;
-        Map<Integer, User> userMap = getUsersMap();
-        for (Map.Entry<Integer, User> users : userMap.entrySet()) {
+        Map<Long, User> userMap = getAllUsers();
+        for (Map.Entry<Long, User> users : userMap.entrySet()) {
             if (login.equals(users.getValue().getLogin())) {
                 user = users.getValue();
                 return user;
@@ -79,14 +81,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void createUser(User user) {
+        userDao.createUser(user);
+    }
+
+    @Override
     public void removeUserById(long id) {
         userDao.removeUserById(id);
     }
 
     @Override
     public void removeUserByLogin(String login) {
-        Map<Integer, User> userMap = getUsersMap();
-        for (Map.Entry<Integer, User> users : userMap.entrySet()) {
+        Map<Long, User> userMap = getAllUsers();
+        for (Map.Entry<Long, User> users : userMap.entrySet()) {
             if (login.equals(users.getValue().getLogin())) {
                 userDao.removeUserById(users.getKey());
             }
@@ -95,8 +102,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeUserByEmail(String email) {
-        Map<Integer, User> userMap = getUsersMap();
-        for (Map.Entry<Integer, User> users : userMap.entrySet()) {
+        Map<Long, User> userMap = getAllUsers();
+        for (Map.Entry<Long, User> users : userMap.entrySet()) {
             if (email.equals(users.getValue().getEmail())) {
                 userDao.removeUserById(users.getKey());
             }
@@ -105,8 +112,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserName(String name, long id) {
-        Map<Integer, User> userMap = getUsersMap();
-        User user = userMap.get((int)id);
+        Map<Long, User> userMap = getAllUsers();
+        User user = userMap.get(id);
         User userUpdate = new User.Builder()
                 .setName(name)
                 .setLastname(user.getLastname())
@@ -121,8 +128,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserLastname(String lastname, long id) {
-        Map<Integer, User> userMap = getUsersMap();
-        User user = userMap.get((int)id);
+        Map<Long, User> userMap = getAllUsers();
+        User user = userMap.get(id);
         User userUpdate = new User.Builder()
                 .setName(user.getName())
                 .setLastname(lastname)
@@ -137,8 +144,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserLogin(String login, long id) {
-        Map<Integer, User> userMap = getUsersMap();
-        User user = userMap.get((int)id);
+        Map<Long, User> userMap = getAllUsers();
+        User user = userMap.get(id);
         User userUpdate = new User.Builder()
                 .setName(user.getName())
                 .setLastname(user.getLastname())
@@ -153,8 +160,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserEmail(String email, long id) {
-        Map<Integer, User> userMap = getUsersMap();
-        User user = userMap.get((int)id);
+        Map<Long, User> userMap = getAllUsers();
+        User user = userMap.get(id);
         User userUpdate = new User.Builder()
                 .setName(user.getName())
                 .setLastname(user.getLastname())
@@ -169,8 +176,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserPassword(String password, long id) {
-        Map<Integer, User> userMap = getUsersMap();
-        User user = userMap.get((int)id);
+        Map<Long, User> userMap = getAllUsers();
+        User user = userMap.get(id);
         User userUpdate = new User.Builder()
                 .setName(user.getName())
                 .setLastname(user.getLastname())
@@ -185,8 +192,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserDateOfBirth(String dateOfBirth, long id) {
-        Map<Integer, User> userMap = getUsersMap();
-        User user = userMap.get((int)id);
+        Map<Long, User> userMap = getAllUsers();
+        User user = userMap.get(id);
         User userUpdate = new User.Builder()
                 .setName(user.getName())
                 .setLastname(user.getLastname())

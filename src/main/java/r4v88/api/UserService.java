@@ -2,12 +2,17 @@ package r4v88.api;
 
 import r4v88.model.User;
 
+import java.util.Map;
+
 public interface UserService {
 
+    Map<Long, User> getAllUsers();
     User getUserById(long id);
     User getUserByNameAndLastname(String name, String lastname);
     User getUserByEmail(String email);
     User getUserByLogin(String login);
+
+    void createUser(User user);
 
     void removeUserById (long id);
     void removeUserByLogin (String login);

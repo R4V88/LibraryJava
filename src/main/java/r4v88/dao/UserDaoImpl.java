@@ -37,8 +37,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Map<Integer, User> getAllUsers() {
-        Map<Integer, User> users = new LinkedHashMap<>();
+    public Map<Long, User> getAllUsers() {
+        Map<Long, User> users = new LinkedHashMap<>();
         Statement statement = null;
 
         try {
@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
                         .setDateOfBirth(dateOfBirth)
                         .build();
 
-                users.put((int) id, user);
+                users.put(id, user);
             }
             statement.close();
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void saveUser(User user) {
+    public void createUser(User user) {
         PreparedStatement preparedStatement = null;
         try {
             String query = "insert into " + TABLE_NAME + " (name, lastname, login, email, password, dateOfBirth) values (?, ?, ?, ?, ?, ?)";
