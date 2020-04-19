@@ -1,6 +1,8 @@
 package r4v88.api;
 
+import r4v88.exception.UserWithEmailDoesNotExist;
 import r4v88.exception.UserWithIdDoesNotExist;
+import r4v88.exception.UserWithNameAndLastNameDoesNotExist;
 import r4v88.model.User;
 
 import java.util.Map;
@@ -9,8 +11,8 @@ public interface UserService {
 
     Map<Long, User> getAllUsers();
     User getUserById(long id) throws UserWithIdDoesNotExist;
-    User getUserByNameAndLastname(String name, String lastname);
-    User getUserByEmail(String email);
+    User getUserByNameAndLastname(String name, String lastname) throws UserWithNameAndLastNameDoesNotExist;
+    User getUserByEmail(String email) throws UserWithEmailDoesNotExist;
     User getUserByLogin(String login);
 
     void createUser(User user);
