@@ -8,7 +8,7 @@ public interface UserDao {
 
     Map<Long, User> getAllUsers();
 
-    void createUser(User user);
+    void insertUser(User user);
 
     void updateUser(User user, long id);
 

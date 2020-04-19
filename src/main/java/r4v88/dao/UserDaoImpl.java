@@ -74,7 +74,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void createUser(User user) {
+    public void insertUser(User user) {
         PreparedStatement preparedStatement = null;
         try {
             String query = "insert into " + TABLE_NAME + " (name, lastname, login, email, password, dateOfBirth) values (?, ?, ?, ?, ?, ?)";

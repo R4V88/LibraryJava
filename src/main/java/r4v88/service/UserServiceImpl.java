@@ -3,6 +3,7 @@ package r4v88.service;
 import r4v88.api.UserDao;
 import r4v88.api.UserService;
 import r4v88.dao.UserDaoImpl;
+import r4v88.exception.UserWithIdDoesNotExist;
 import r4v88.model.User;
 
 import java.util.Map;
@@ -26,17 +27,28 @@ public class UserServiceImpl implements UserService {
         return userDao.getAllUsers();
     }
 
-    @Override
-    public User getUserById(long id) {
-        User user = null;
-        Map<Long, User> usersMap = getAllUsers();
 
-        for (Map.Entry<Long, User> users : usersMap.entrySet()) {
-            if (id == users.getKey()) {
-                user = users.getValue();
+    @Override
+    public User getUserById(long id) throws UserWithIdDoesNotExist {
+        Map<Long, User> usersMap = getAllUsers();
+        User user = null;
+        if(!isUserWithIdExist(id)){
+            throw new UserWithIdDoesNotExist("User with id = " + id + " doesnt exist!");
+        }
+        else {
+            for (Map.Entry<Long, User> users : usersMap.entrySet()) {
+                if (id == users.getKey()) {
+                    user = users.getValue();
+                }
             }
         }
         return user;
+    }
+
+    private boolean isUserWithIdExist(Long id) {
+        Map<Long, User> idUserMap = getAllUsers();
+        User user = idUserMap.get(id);
+        return user != null;
     }
 
     @Override
@@ -82,7 +94,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(User user) {
-        userDao.createUser(user);
+        userDao.insertUser(user);
     }
 
     @Override
