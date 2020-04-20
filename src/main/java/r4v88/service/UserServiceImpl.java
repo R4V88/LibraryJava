@@ -3,9 +3,7 @@ package r4v88.service;
 import r4v88.api.UserDao;
 import r4v88.api.UserService;
 import r4v88.dao.UserDaoImpl;
-import r4v88.exception.UserWithEmailDoesNotExist;
-import r4v88.exception.UserWithIdDoesNotExist;
-import r4v88.exception.UserWithNameAndLastNameDoesNotExist;
+import r4v88.exception.*;
 import r4v88.model.User;
 
 import java.util.Map;
@@ -34,111 +32,108 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(long id) throws UserWithIdDoesNotExist {
         User user = null;
-        if (!isUserWithIdExist(id)) {
-            throw new UserWithIdDoesNotExist("User with id = " + id + " doesnt exist!");
-        } else {
+        if (isUserWithIdExist(id)) {
             for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
                 if (id == users.getKey()) {
                     user = users.getValue();
                 }
             }
+        } else {
+            throw new UserWithIdDoesNotExist("User with id = " + id + " doesnt exist!");
         }
         return user;
-    }
-
-    private boolean isUserWithIdExist(Long id) {
-        User user = idUserMap.get(id);
-        return user != null;
     }
 
     @Override
     public User getUserByNameAndLastname(String name, String lastname) throws UserWithNameAndLastNameDoesNotExist {
         User user = null;
-        if (!isUserWithNameAndLastnameExist(name, lastname)) {
-            throw new UserWithNameAndLastNameDoesNotExist("User with name: " + name + " and lastname: " + lastname + " doesnt not exist");
-        } else {
+        if (isUserWithNameAndLastnameExist(name, lastname)) {
             for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
                 if (name.equals(users.getValue().getName()) && lastname.equals(users.getValue().getLastname())) {
                     user = users.getValue();
                 }
             }
+        } else {
+            throw new UserWithNameAndLastNameDoesNotExist("User with name: " + name + " and lastname: " + lastname + " doesnt not exist");
         }
         return user;
-    }
-
-    private boolean isUserWithNameAndLastnameExist(String name, String lastname) {
-        for (Map.Entry<Long, User> user : idUserMap.entrySet()) {
-            if (user.getValue().getName().equals(name) && user.getValue().getLastname().equals(lastname)) {
-                return true;
-            }
-
-        }
-        return false;
     }
 
     @Override
     public User getUserByEmail(String email) throws UserWithEmailDoesNotExist {
         User user;
 
-        if (!isUserWithEmailExist(email)) {
-            throw new UserWithEmailDoesNotExist("User with email = " + email + " does not exist!");
-        } else {
+        if (isUserWithEmailExist(email)) {
             for (Map.Entry<Long, User> userEntry : idUserMap.entrySet()) {
                 if (email.equals(userEntry.getValue().getEmail())) {
                     user = userEntry.getValue();
                     return user;
                 }
             }
+        } else {
+            throw new UserWithEmailDoesNotExist("User with email = " + email + " does not exist!");
         }
         return null;
     }
 
-    private boolean isUserWithEmailExist(String email) {
-        for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
-            if (users.getValue().getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
-    public User getUserByLogin(String login) {
+    public User getUserByLogin(String login) throws UserWithLoginDoesNotExist {
         User user;
-        for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
-            if (login.equals(users.getValue().getLogin())) {
-                user = users.getValue();
-                return user;
+
+        if (isUserWithLoginExist(login)) {
+            for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
+                if (login.equals(users.getValue().getLogin())) {
+                    user = users.getValue();
+                    return user;
+                }
             }
+        } else {
+            throw new UserWithLoginDoesNotExist("User with login: " + login + " does not exist!");
         }
         return null;
     }
 
     @Override
-    public void createUser(User user) {
-        userDao.insertUser(user);
-    }
-
-    @Override
-    public void removeUserById(long id) {
-        userDao.removeUserById(id);
-    }
-
-    @Override
-    public void removeUserByLogin(String login) {
-        for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
-            if (login.equals(users.getValue().getLogin())) {
-                userDao.removeUserById(users.getKey());
-            }
+    public void createUser(User user) throws UserWithLoginEmailAlreadyExist {
+        if(!isUserWithLoginExist(user.getLogin()) && !isUserWithEmailExist(user.getEmail())){
+            userDao.insertUser(user);
+        } else {
+            throw new UserWithLoginEmailAlreadyExist("User with login: " + user.getLogin() + " and email: " + user.getEmail() + " already exist!");
         }
     }
 
     @Override
-    public void removeUserByEmail(String email) {
-        for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
-            if (email.equals(users.getValue().getEmail())) {
-                userDao.removeUserById(users.getKey());
+    public void removeUserById(long id) throws UserWithIdDoesNotExist {
+        if (isUserWithIdExist(id)) {
+            userDao.removeUserById(id);
+        } else {
+            throw new UserWithIdDoesNotExist("User with id = " + id + " doesnt exist!");
+        }
+    }
+
+    @Override
+    public void removeUserByLogin(String login) throws UserWithLoginDoesNotExist {
+        if(isUserWithLoginExist(login)) {
+            for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
+                if (login.equals(users.getValue().getLogin())) {
+                    userDao.removeUserById(users.getKey());
+                }
             }
+        } else {
+            throw new UserWithLoginDoesNotExist("User with login: " + login + " does not exist!");
+        }
+    }
+
+    @Override
+    public void removeUserByEmail(String email) throws UserWithEmailDoesNotExist {
+        if(isUserWithEmailExist(email)) {
+            for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
+                if (email.equals(users.getValue().getEmail())) {
+                    userDao.removeUserById(users.getKey());
+                }
+            }
+        } else {
+            throw new UserWithEmailDoesNotExist("User with email = " + email + " does not exist!");
         }
     }
 
@@ -230,5 +225,38 @@ public class UserServiceImpl implements UserService {
                 .build();
 
         userDao.updateUser(userUpdate, id);
+    }
+
+    private boolean isUserWithIdExist(Long id) {
+        User user = idUserMap.get(id);
+        return user != null;
+    }
+
+    private boolean isUserWithLoginExist(String login) {
+        for (Map.Entry<Long, User> user : idUserMap.entrySet()) {
+            if (user.getValue().getLogin().equals(login)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isUserWithEmailExist(String email) {
+        for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
+            if (users.getValue().getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isUserWithNameAndLastnameExist(String name, String lastname) {
+        for (Map.Entry<Long, User> user : idUserMap.entrySet()) {
+            if (user.getValue().getName().equals(name) && user.getValue().getLastname().equals(lastname)) {
+                return true;
+            }
+
+        }
+        return false;
     }
 }
