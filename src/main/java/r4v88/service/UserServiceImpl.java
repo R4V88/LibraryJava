@@ -150,6 +150,7 @@ public class UserServiceImpl implements UserService {
                 .setEmail(user.getEmail())
                 .setPassword(user.getPassword())
                 .setDateOfBirth(user.getDateOfBirth())
+                .setGender(user.getGender())
                 .build();
 
         userDao.updateUser(userUpdate, id);
@@ -165,6 +166,7 @@ public class UserServiceImpl implements UserService {
                 .setEmail(user.getEmail())
                 .setPassword(user.getPassword())
                 .setDateOfBirth(user.getDateOfBirth())
+                .setGender(user.getGender())
                 .build();
 
         userDao.updateUser(userUpdate, id);
@@ -181,6 +183,7 @@ public class UserServiceImpl implements UserService {
                     .setEmail(user.getEmail())
                     .setPassword(user.getPassword())
                     .setDateOfBirth(user.getDateOfBirth())
+                    .setGender(user.getGender())
                     .build();
 
             userDao.updateUser(userUpdate, id);
@@ -201,6 +204,7 @@ public class UserServiceImpl implements UserService {
                     .setEmail(email)
                     .setPassword(user.getPassword())
                     .setDateOfBirth(user.getDateOfBirth())
+                    .setGender(user.getGender())
                     .build();
 
             userDao.updateUser(userUpdate, id);
@@ -220,6 +224,7 @@ public class UserServiceImpl implements UserService {
                     .setEmail(user.getEmail())
                     .setPassword(password)
                     .setDateOfBirth(user.getDateOfBirth())
+                    .setGender(user.getGender())
                     .build();
 
             userDao.updateUser(userUpdate, id);
@@ -239,6 +244,7 @@ public class UserServiceImpl implements UserService {
                     .setEmail(user.getEmail())
                     .setPassword(user.getPassword())
                     .setDateOfBirth(dateOfBirth)
+                    .setGender(user.getGender())
                     .build();
 
             userDao.updateUser(userUpdate, id);

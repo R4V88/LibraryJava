@@ -6,10 +6,10 @@ public enum RegexpValidator {
         MIN_LENGTH_LOGIN
         min 6 characters length.
      */
-    MIN_LENGTH_LOGIN("/^.{6,}$/"),
+    MIN_LENGTH_LOGIN("[\\S\\s]{6,}$"),
 
     /*
-        For PASSWORD_VALIDATOR below:
+        For PASSWORD_VALIDATOR below: 1Ab*45678
         1) Password must contain at least 8 characters
         2) Password must contain at least 1 number
         3) Password must contain at least 1 upper case letter

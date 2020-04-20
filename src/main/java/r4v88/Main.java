@@ -1,12 +1,11 @@
 package r4v88;
 
 import r4v88.api.UserService;
-import r4v88.exception.UserWithEmailDoesNotExist;
-import r4v88.exception.UserWithIdDoesNotExist;
-import r4v88.exception.UserWithNameAndLastNameDoesNotExist;
+import r4v88.exception.*;
 import r4v88.model.Author;
 import r4v88.model.Book;
 import r4v88.model.User;
+import r4v88.model.enums.Gender;
 import r4v88.model.enums.Type;
 import r4v88.service.UserServiceImpl;
 import r4v88.validator.enums.RegexpValidator;
@@ -14,23 +13,25 @@ import r4v88.validator.enums.RegexpValidator;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws UserWithIdDoesNotExist, UserWithNameAndLastNameDoesNotExist, UserWithEmailDoesNotExist {
+    public static void main(String[] args) throws UserWithIdDoesNotExist, UserWithNameAndLastNameDoesNotExist, UserWithEmailDoesNotExist, UserWithLoginEmailAlreadyExist, DateOfBirthIsNotValid, LoginIsNotValid, PasswordIsNotValid, EmailIsNotValid {
         User wacek = new User.Builder()
                 .setName("tak")
                 .setLastname("nie")
-                .setLogin("wacek")
-                .setPassword("placek321")
-                .setDateOfBirth("11.22.3333")
+                .setLogin("wacek2")
+                .setPassword("1Ab*45678")
+                .setDateOfBirth("11.08.2018")
                 .setEmail("email@gmail.mail")
+                .setGender(Gender.MALE)
                 .build();
 
         User marek = new User.Builder()
                 .setName("marek")
                 .setLastname("jest")
-                .setLogin("mare")
-                .setPassword("admin1")
-                .setDateOfBirth("11.22.3334")
+                .setLogin("marekk")
+                .setPassword("1Ab*45678")
+                .setDateOfBirth("11.10.1994")
                 .setEmail("email@dzimejl.mail")
+                .setGender(Gender.FEMALE)
                 .build();
 
         Book book = new Book.Builder()
@@ -46,7 +47,7 @@ public class Main {
         Author author = new Author.Builder()
                 .setName("Name")
                 .setLastname("LastName")
-                .setDateOfBirth("19.19.19")
+                .setDateOfBirth("19.12.2019")
                 .build();
 
 //        UserDao userDao = UserDaoImpl.getInstance();
@@ -67,17 +68,20 @@ public class Main {
         User karolek = new User.Builder()
                 .setName("Karolak")
                 .setLastname("Worek")
-                .setLogin("takilogin")
-                .setEmail("takimejl")
-                .setPassword("takiepasword")
-                .setDateOfBirth("1123123124")
+                .setLogin("loginbb")
+                .setEmail("taki@mejl")
+                .setPassword("1Ab*45678")
+                .setDateOfBirth("11.12.2018")
+                .setGender(Gender.MALE)
                 .build();
-//        userService.createUser(karolek);
+        userService.createUser(karolek);
+        userService.createUser(marek);
+        userService.createUser(wacek);
         printAllUsers();
 //        userService.updateUserName("kutalak", 6);
 //        printAllUsers();
 
-        System.out.println(RegexpValidator.MIN_LENGTH_LOGIN.getRegexp());
+//        System.out.println(RegexpValidator.MIN_LENGTH_LOGIN.getRegexp());
 
 
 //        System.out.println(userService.getAllUsers().toString());

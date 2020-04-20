@@ -2,6 +2,7 @@ package r4v88.dao;
 
 import r4v88.api.UserDao;
 import r4v88.model.User;
+import r4v88.model.parser.UserParser;
 
 import java.sql.*;
 import java.util.LinkedHashMap;
@@ -15,6 +16,7 @@ public class UserDaoImpl implements UserDao {
     private final String TABLE_NAME = "users";
     private final String USER = "root";
     private final String PASSWORD = "root";
+    private  UserParser userParser = UserParser.getInstance();
 
     public static UserDao getInstance() {
         return UserDaoImpl.instance;
@@ -54,6 +56,7 @@ public class UserDaoImpl implements UserDao {
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
                 String dateOfBirth = resultSet.getString("dateofbirth");
+                String gender = resultSet.getString("gender");
 
                 User user = new User.Builder()
                         .setName(name)
@@ -62,6 +65,7 @@ public class UserDaoImpl implements UserDao {
                         .setEmail(email)
                         .setPassword(password)
                         .setDateOfBirth(dateOfBirth)
+                        .setGender(userParser.stringToEnum(gender))
                         .build();
 
                 users.put(id, user);
@@ -77,7 +81,7 @@ public class UserDaoImpl implements UserDao {
     public void insertUser(User user) {
         PreparedStatement preparedStatement = null;
         try {
-            String query = "insert into " + TABLE_NAME + " (name, lastname, login, email, password, dateOfBirth) values (?, ?, ?, ?, ?, ?)";
+            String query = "insert into " + TABLE_NAME + " (name, lastname, login, email, password, dateOfBirth, gender) values (?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, user.getName());
@@ -86,6 +90,8 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getPassword());
             preparedStatement.setString(6, user.getDateOfBirth());
+            preparedStatement.setString(7, user.getGender().toString().toLowerCase());
+
 
             preparedStatement.execute();
             preparedStatement.close();

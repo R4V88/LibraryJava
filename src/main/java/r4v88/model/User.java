@@ -1,5 +1,7 @@
 package r4v88.model;
 
+import r4v88.model.enums.Gender;
+
 public class User {
 
     private String name;
@@ -8,14 +10,16 @@ public class User {
     private String email;
     private String password;
     private String dateOfBirth;
+    private Gender gender;
 
-    private User(String name, String lastname, String login, String email, String password, String dateOfBirth) {
+    private User(String name, String lastname, String login, String email, String password, String dateOfBirth, Gender gender) {
         this.name = name;
         this.lastname = lastname;
         this.login = login;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
     }
 
     public static class Builder {
@@ -25,6 +29,7 @@ public class User {
         private String email;
         private String password;
         private String dateOfBirth;
+        private Gender gender;
 
         /*
             Konstruktor parametrowy nie ma sensu bo w ten sposob wprowadzamy parametry jak bezposrednio w konstruktorze
@@ -73,8 +78,13 @@ public class User {
             return this;
         }
 
+        public Builder setGender(Gender gender) {
+            this.gender = gender;
+            return this;
+        }
+
         public User build() {
-            return new User(name, lastname, login, email, password, dateOfBirth);
+            return new User(name, lastname, login, email, password, dateOfBirth, gender);
         }
     }
 
@@ -102,17 +112,18 @@ public class User {
         return dateOfBirth;
     }
 
+    public Gender getGender() { return gender; }
+
     @Override
     public String toString() {
-        return "User {" +
+        return "User{" +
                 "name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", login='" + login + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", gender=" + gender +
                 '}';
     }
-
-
 }

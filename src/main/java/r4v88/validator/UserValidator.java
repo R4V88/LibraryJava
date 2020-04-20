@@ -39,16 +39,16 @@ public class UserValidator {
 
     public boolean isUserValid(User user) throws LoginIsNotValid, PasswordIsNotValid, EmailIsNotValid, DateOfBirthIsNotValid {
         if (!isLoginValid(user.getLogin())) {
-            throw new LoginIsNotValid("Login is too short! (Min. 6 characters)");
+            throw new LoginIsNotValid(user.getName() + " your login is too short! (Min. 6 characters)");
         }
         if (!isPasswordValid(user.getPassword())) {
-            throw new PasswordIsNotValid("Password is not valid!");
+            throw new PasswordIsNotValid(user.getName() + " your password is not valid!");
         }
         if (!isEmailValid(user.getEmail())) {
-            throw new EmailIsNotValid("Email is not valid!");
+            throw new EmailIsNotValid(user.getName() + " your email is not valid!");
         }
         if (!isDateOfBirthValid(user.getDateOfBirth())) {
-            throw new DateOfBirthIsNotValid("Date of your birth is not valid!");
+            throw new DateOfBirthIsNotValid(user.getName() + " your date of your birth is not valid!");
         }
 
         return true;
