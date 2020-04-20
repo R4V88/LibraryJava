@@ -5,12 +5,15 @@ import r4v88.api.UserService;
 import r4v88.dao.UserDaoImpl;
 import r4v88.exception.*;
 import r4v88.model.User;
+import r4v88.validator.UserValidator;
 
 import java.util.Map;
 
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao = UserDaoImpl.getInstance();
+    private final UserValidator userValidator = UserValidator.getInstance();
+
     private final Map<Long, User> idUserMap = getAllUsers();
 
     private static UserService instance = new UserServiceImpl();
@@ -94,8 +97,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(User user) throws UserWithLoginEmailAlreadyExist {
-        if(!isUserWithLoginExist(user.getLogin()) && !isUserWithEmailExist(user.getEmail())){
+    public void createUser(User user) throws UserWithLoginEmailAlreadyExist, DateOfBirthIsNotValid, LoginIsNotValid, PasswordIsNotValid, EmailIsNotValid {
+        if(!isUserWithLoginExist(user.getLogin()) && !isUserWithEmailExist(user.getEmail()) && userValidator.isUserValid(user)){
             userDao.insertUser(user);
         } else {
             throw new UserWithLoginEmailAlreadyExist("User with login: " + user.getLogin() + " and email: " + user.getEmail() + " already exist!");

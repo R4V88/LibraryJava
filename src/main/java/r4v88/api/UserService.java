@@ -13,7 +13,7 @@ public interface UserService {
     User getUserByEmail(String email) throws UserWithEmailDoesNotExist;
     User getUserByLogin(String login) throws UserWithLoginDoesNotExist;
 
-    void createUser(User user) throws UserWithLoginEmailAlreadyExist;
+    void createUser(User user) throws UserWithLoginEmailAlreadyExist, DateOfBirthIsNotValid, LoginIsNotValid, PasswordIsNotValid, EmailIsNotValid;
 
     void removeUserById (long id) throws UserWithIdDoesNotExist;
     void removeUserByLogin (String login) throws UserWithLoginDoesNotExist;
