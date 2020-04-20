@@ -9,6 +9,7 @@ import r4v88.model.Book;
 import r4v88.model.User;
 import r4v88.model.enums.Type;
 import r4v88.service.UserServiceImpl;
+import r4v88.validator.enums.RegexpValidator;
 
 import java.util.Map;
 
@@ -73,8 +74,10 @@ public class Main {
                 .build();
 //        userService.createUser(karolek);
         printAllUsers();
-        userService.updateUserName("kutalak", 6);
-        printAllUsers();
+//        userService.updateUserName("kutalak", 6);
+//        printAllUsers();
+
+        System.out.println(RegexpValidator.MIN_LENGTH_LOGIN.getRegexp());
 
 
 //        System.out.println(userService.getAllUsers().toString());
