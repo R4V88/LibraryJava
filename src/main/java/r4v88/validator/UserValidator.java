@@ -26,7 +26,7 @@ public class UserValidator {
     }
 
     public boolean isLoginValid(String login) {
-        return login.matches(RegexpValidator.MIN_LENGTH_LOGIN.toString());
+        return login.matches(RegexpValidator.MIN_LENGTH_LOGIN.getRegexp());
     }
 
     public boolean isEmailValid(String email) {
