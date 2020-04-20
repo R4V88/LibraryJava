@@ -39,19 +39,19 @@ public class UserValidator {
         return instance;
     }
 
-    private boolean isPasswordValid(String password) {
+    public boolean isPasswordValid(String password) {
         return password.matches(PASSWORD_VALIDATOR);
     }
 
-    private boolean isLoginValid(String login) {
+    public boolean isLoginValid(String login) {
         return login.length() >= MIN_LENGTH_LOGIN;
     }
 
-    private boolean isEmailValid(String email) {
+    public boolean isEmailValid(String email) {
         return email.matches(EMAIL_VALIDATOR);
     }
 
-    private boolean isDateOfBirthValid(String date) {
+    public boolean isDateOfBirthValid(String date) {
         return date.matches(DATE_VALIDATOR);
     }
 

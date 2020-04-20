@@ -171,63 +171,80 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserLogin(String login, long id) {
-        User user = idUserMap.get(id);
-        User userUpdate = new User.Builder()
-                .setName(user.getName())
-                .setLastname(user.getLastname())
-                .setLogin(login)
-                .setEmail(user.getEmail())
-                .setPassword(user.getPassword())
-                .setDateOfBirth(user.getDateOfBirth())
-                .build();
+    public void updateUserLogin(String login, long id) throws LoginIsNotValid {
+        if(userValidator.isLoginValid(login)) {
+            User user = idUserMap.get(id);
+            User userUpdate = new User.Builder()
+                    .setName(user.getName())
+                    .setLastname(user.getLastname())
+                    .setLogin(login)
+                    .setEmail(user.getEmail())
+                    .setPassword(user.getPassword())
+                    .setDateOfBirth(user.getDateOfBirth())
+                    .build();
 
-        userDao.updateUser(userUpdate, id);
+            userDao.updateUser(userUpdate, id);
+        }
+        else {
+            throw new LoginIsNotValid("Login is not valid!");
+        }
     }
 
     @Override
-    public void updateUserEmail(String email, long id) {
-        User user = idUserMap.get(id);
-        User userUpdate = new User.Builder()
-                .setName(user.getName())
-                .setLastname(user.getLastname())
-                .setLogin(user.getLogin())
-                .setEmail(email)
-                .setPassword(user.getPassword())
-                .setDateOfBirth(user.getDateOfBirth())
-                .build();
+    public void updateUserEmail(String email, long id) throws EmailIsNotValid {
+        if(userValidator.isEmailValid(email)) {
+            User user = idUserMap.get(id);
+            User userUpdate = new User.Builder()
+                    .setName(user.getName())
+                    .setLastname(user.getLastname())
+                    .setLogin(user.getLogin())
+                    .setEmail(email)
+                    .setPassword(user.getPassword())
+                    .setDateOfBirth(user.getDateOfBirth())
+                    .build();
 
-        userDao.updateUser(userUpdate, id);
+            userDao.updateUser(userUpdate, id);
+        } else {
+            throw new EmailIsNotValid("Email is not valid!");
+        }
     }
 
     @Override
-    public void updateUserPassword(String password, long id) {
-        User user = idUserMap.get(id);
-        User userUpdate = new User.Builder()
-                .setName(user.getName())
-                .setLastname(user.getLastname())
-                .setLogin(user.getLogin())
-                .setEmail(user.getEmail())
-                .setPassword(password)
-                .setDateOfBirth(user.getDateOfBirth())
-                .build();
+    public void updateUserPassword(String password, long id) throws PasswordIsNotValid {
+        if(userValidator.isPasswordValid(password)) {
+            User user = idUserMap.get(id);
+            User userUpdate = new User.Builder()
+                    .setName(user.getName())
+                    .setLastname(user.getLastname())
+                    .setLogin(user.getLogin())
+                    .setEmail(user.getEmail())
+                    .setPassword(password)
+                    .setDateOfBirth(user.getDateOfBirth())
+                    .build();
 
-        userDao.updateUser(userUpdate, id);
+            userDao.updateUser(userUpdate, id);
+        } else {
+            throw new PasswordIsNotValid("Password is not valid!");
+        }
     }
 
     @Override
-    public void updateUserDateOfBirth(String dateOfBirth, long id) {
-        User user = idUserMap.get(id);
-        User userUpdate = new User.Builder()
-                .setName(user.getName())
-                .setLastname(user.getLastname())
-                .setLogin(user.getLogin())
-                .setEmail(user.getEmail())
-                .setPassword(user.getPassword())
-                .setDateOfBirth(dateOfBirth)
-                .build();
+    public void updateUserDateOfBirth(String dateOfBirth, long id) throws DateOfBirthIsNotValid {
+        if(userValidator.isDateOfBirthValid(dateOfBirth)) {
+            User user = idUserMap.get(id);
+            User userUpdate = new User.Builder()
+                    .setName(user.getName())
+                    .setLastname(user.getLastname())
+                    .setLogin(user.getLogin())
+                    .setEmail(user.getEmail())
+                    .setPassword(user.getPassword())
+                    .setDateOfBirth(dateOfBirth)
+                    .build();
 
-        userDao.updateUser(userUpdate, id);
+            userDao.updateUser(userUpdate, id);
+        } else {
+            throw new DateOfBirthIsNotValid("Date of your birth is not valid!");
+        }
     }
 
     private boolean isUserWithIdExist(Long id) {

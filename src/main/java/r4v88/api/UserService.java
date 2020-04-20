@@ -21,8 +21,8 @@ public interface UserService {
 
     void updateUserName (String name, long id);
     void updateUserLastname (String lastname, long id);
-    void updateUserLogin (String login, long id);
-    void updateUserEmail (String email, long id);
-    void updateUserPassword (String password, long id);
-    void updateUserDateOfBirth (String dateOfBirth, long id);
+    void updateUserLogin (String login, long id) throws LoginIsNotValid;
+    void updateUserEmail (String email, long id) throws EmailIsNotValid;
+    void updateUserPassword (String password, long id) throws PasswordIsNotValid;
+    void updateUserDateOfBirth (String dateOfBirth, long id) throws DateOfBirthIsNotValid;
 }
