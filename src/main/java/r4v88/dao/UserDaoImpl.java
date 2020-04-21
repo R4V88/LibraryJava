@@ -16,7 +16,7 @@ public class UserDaoImpl implements UserDao {
     private final String TABLE_NAME = "users";
     private final String USER = "root";
     private final String PASSWORD = "root";
-    private  UserParser userParser = UserParser.getInstance();
+    private UserParser userParser = UserParser.getInstance();
 
     public static UserDao getInstance() {
         return UserDaoImpl.instance;
@@ -102,19 +102,91 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(User user, long id) {
+    public void updateUserName(String name, long id) {
         PreparedStatement preparedStatement = null;
         try {
-            String query = "update " + TABLE_NAME + " set name = ?, lastname = ?, login = ?, email = ?, password = ?, dateofbirth = ? where id = ?";
+            String query = "update " + TABLE_NAME + " set name = ? where id = ?";
             preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getLastname());
-            preparedStatement.setString(3, user.getLogin());
-            preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setString(5, user.getPassword());
-            preparedStatement.setString(6, user.getDateOfBirth());
-            preparedStatement.setLong(7, id);
+            preparedStatement.setString(1, name);
+            preparedStatement.setLong(2, id);
+
+            preparedStatement.execute();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateUserLastname(String lastname, long id) {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String query = "update " + TABLE_NAME + " set lastname = ? where id = ?";
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, lastname);
+            preparedStatement.setLong(2, id);
+
+            preparedStatement.execute();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void updateUserLogin(String login, long id) {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String query = "update " + TABLE_NAME + " set login = ? where id = ?";
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, login);
+            preparedStatement.setLong(2, id);
+
+            preparedStatement.execute();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateUserEmail(String email, long id) {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String query = "update " + TABLE_NAME + " set email = ? where id = ?";
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, email);
+            preparedStatement.setLong(2, id);
+
+            preparedStatement.execute();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateUserPassword(String password, long id) {
+        PreparedStatement preparedStatement = null;
+
+        try {
+            String query = "update " + TABLE_NAME + " set password = ? where id = ?";
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, password);
+            preparedStatement.setLong(2, id);
 
             preparedStatement.execute();
             preparedStatement.close();

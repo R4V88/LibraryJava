@@ -24,5 +24,4 @@ public interface UserService {
     void updateUserLogin (String login, long id) throws LoginIsNotValid;
     void updateUserEmail (String email, long id) throws EmailIsNotValid;
     void updateUserPassword (String password, long id) throws PasswordIsNotValid;
-    void updateUserDateOfBirth (String dateOfBirth, long id) throws DateOfBirthIsNotValid;
 }

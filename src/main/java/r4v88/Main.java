@@ -74,9 +74,15 @@ public class Main {
                 .setDateOfBirth("11.12.2018")
                 .setGender(Gender.MALE)
                 .build();
-        userService.createUser(karolek);
-        userService.createUser(marek);
-        userService.createUser(wacek);
+//        userService.createUser(karolek);
+////        userService.createUser(marek);
+////        userService.createUser(wacek);
+
+        userService.updateUserName("Czarek", 1);
+        userService.updateUserLogin("loginbbc", 1);
+        userService.updateUserEmail("1232@3123", 1);
+        userService.updateUserLastname("Nazwisko", 1);
+        userService.updateUserPassword("asli!jdD1", 1);
         printAllUsers();
 //        userService.updateUserName("kutalak", 6);
 //        printAllUsers();
