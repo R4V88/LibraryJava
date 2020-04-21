@@ -29,8 +29,8 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book getBookById(long id) {
         Book book = null;
-        for(Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()) {
-            if(bookFromDB.getKey() == id){
+        for (Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()) {
+            if (bookFromDB.getKey() == id) {
                 book = bookFromDB.getValue();
             }
         }

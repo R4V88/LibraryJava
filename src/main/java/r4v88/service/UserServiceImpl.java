@@ -5,8 +5,10 @@ import r4v88.api.UserService;
 import r4v88.dao.UserDaoImpl;
 import r4v88.exception.*;
 import r4v88.model.User;
+import r4v88.model.enums.Role;
 import r4v88.validator.UserValidator;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class UserServiceImpl implements UserService {
@@ -29,6 +31,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<Long, User> getAllUsers() {
         return userDao.getAllUsers();
+    }
+
+    @Override
+    public Map<Long, User> getUsersByRole(Role role) {
+        Map<Long, User> usersByRole = new LinkedHashMap<>();
+        for (Map.Entry<Long, User> search : idUserMap.entrySet()) {
+            if (search.getValue().getRole().equals(role)) {
+                usersByRole.put(search.getKey(), search.getValue());
+            }
+        }
+        return usersByRole;
     }
 
 

@@ -1,6 +1,7 @@
 package r4v88.model;
 
 import r4v88.model.enums.Gender;
+import r4v88.model.enums.Role;
 
 public class User {
 
@@ -11,8 +12,9 @@ public class User {
     private String password;
     private String dateOfBirth;
     private Gender gender;
+    private Role role;
 
-    private User(String name, String lastname, String login, String email, String password, String dateOfBirth, Gender gender) {
+    private User(String name, String lastname, String login, String email, String password, String dateOfBirth, Gender gender, Role role) {
         this.name = name;
         this.lastname = lastname;
         this.login = login;
@@ -20,6 +22,7 @@ public class User {
         this.password = password;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
+        this.role = role;
     }
 
     public static class Builder {
@@ -30,6 +33,7 @@ public class User {
         private String password;
         private String dateOfBirth;
         private Gender gender;
+        private Role role;
 
         /*
             Konstruktor parametrowy nie ma sensu bo w ten sposob wprowadzamy parametry jak bezposrednio w konstruktorze
@@ -83,8 +87,13 @@ public class User {
             return this;
         }
 
+        public Builder setRole(Role role) {
+            this.role = role;
+            return this;
+        }
+
         public User build() {
-            return new User(name, lastname, login, email, password, dateOfBirth, gender);
+            return new User(name, lastname, login, email, password, dateOfBirth, gender, role);
         }
     }
 
@@ -112,7 +121,13 @@ public class User {
         return dateOfBirth;
     }
 
-    public Gender getGender() { return gender; }
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Role getRole() {
+        return role;
+    }
 
     @Override
     public String toString() {
@@ -124,6 +139,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", gender=" + gender +
+                ", role=" + role +
                 '}';
     }
 }

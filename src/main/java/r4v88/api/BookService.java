@@ -12,7 +12,7 @@ public interface BookService {
 
     void addBook(Book book);
 
-    void removeBook (long id);
+    void removeBook(long id);
 
-    void borrowBook (long id, boolean borrow);
+    void borrowBook(long id, boolean borrow);
 }

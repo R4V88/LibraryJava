@@ -8,6 +8,7 @@ import r4v88.model.Author;
 import r4v88.model.Book;
 import r4v88.model.User;
 import r4v88.model.enums.Gender;
+import r4v88.model.enums.Role;
 import r4v88.model.enums.Type;
 import r4v88.service.UserServiceImpl;
 
@@ -23,6 +24,7 @@ public class Main {
                 .setDateOfBirth("11.08.2018")
                 .setEmail("email@gmail.mail")
                 .setGender(Gender.MALE)
+                .setRole(Role.USER)
                 .build();
 
         User marek = new User.Builder()
@@ -33,6 +35,7 @@ public class Main {
                 .setDateOfBirth("11.10.1994")
                 .setEmail("email@dzimejl.mail")
                 .setGender(Gender.FEMALE)
+                .setRole(Role.ADMIN)
                 .build();
 
         Book book = new Book.Builder()
@@ -74,6 +77,7 @@ public class Main {
                 .setPassword("1Ab*45678")
                 .setDateOfBirth("11.12.2018")
                 .setGender(Gender.MALE)
+                .setRole(Role.USER)
                 .build();
 //        userService.createUser(karolek);
 ////        userService.createUser(marek);

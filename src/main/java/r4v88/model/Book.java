@@ -55,7 +55,7 @@ public class Book {
             return this;
         }
 
-        public Builder setIsBorrowed(boolean isBorrowed){
+        public Builder setIsBorrowed(boolean isBorrowed) {
             this.isBorrowed = isBorrowed;
             return this;
         }

@@ -10,7 +10,7 @@ public interface BookDao {
 
     Map<Long, Book> getAllBooks();
 
-    void removeBook (long id);
+    void removeBook(long id);
 
-    void borrowBook (long id, boolean borrow);
+    void borrowBook(long id, boolean borrow);
 }

@@ -94,7 +94,7 @@ public class BookDaoImpl implements BookDao {
             String query = "delete from " + TABLE_NAME + " where id = ?";
             preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setLong(1 , id);
+            preparedStatement.setLong(1, id);
 
             preparedStatement.execute();
             preparedStatement.close();
@@ -108,7 +108,7 @@ public class BookDaoImpl implements BookDao {
     public void borrowBook(long id, boolean borrow) {
         PreparedStatement preparedStatement = null;
         try {
-            String query = "update " +TABLE_NAME+ " set isborrowed = ? where id = ?";
+            String query = "update " + TABLE_NAME + " set isborrowed = ? where id = ?";
             preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setBoolean(1, borrow);

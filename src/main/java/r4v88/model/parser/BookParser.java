@@ -1,6 +1,5 @@
 package r4v88.model.parser;
 
-import r4v88.model.enums.Gender;
 import r4v88.model.enums.Type;
 
 public class BookParser {
@@ -8,7 +7,7 @@ public class BookParser {
     private static BookParser instance = null;
 
     public static BookParser getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             return instance = new BookParser();
         }
         return instance;
