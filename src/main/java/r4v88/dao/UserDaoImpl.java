@@ -11,11 +11,13 @@ import java.util.Map;
 public class UserDaoImpl implements UserDao {
 
     private static UserDao instance = new UserDaoImpl();
+
     private Connection connection;
     private final String DATABASE_NAME = "library";
     private final String TABLE_NAME = "users";
     private final String USER = "root";
     private final String PASSWORD = "root";
+
     private UserParser userParser = UserParser.getInstance();
 
     public static UserDao getInstance() {
@@ -25,8 +27,6 @@ public class UserDaoImpl implements UserDao {
     private UserDaoImpl() {
         init();
     }
-
-    ;
 
     private void init() {
         try {

@@ -1,7 +1,6 @@
 package r4v88.model;
 
 public class Author {
-    private long id;
     private String name;
     private String lastname;
     private String dateOfBirth;
@@ -41,10 +40,6 @@ public class Author {
 
     }
 
-    public long getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
     }
@@ -60,8 +55,7 @@ public class Author {
     @Override
     public String toString() {
         return "Author{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 '}';
