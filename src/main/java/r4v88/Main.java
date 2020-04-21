@@ -1,6 +1,8 @@
 package r4v88;
 
+import r4v88.api.BookDao;
 import r4v88.api.UserService;
+import r4v88.dao.BookDaoImpl;
 import r4v88.exception.*;
 import r4v88.model.Author;
 import r4v88.model.Book;
@@ -35,7 +37,7 @@ public class Main {
 
         Book book = new Book.Builder()
                 .setTitle("title")
-                .setIsbn("123124123")
+                .setIsbn(123124123)
                 .setPublisher("YES")
                 .setYear("12398")
                 .setType(Type.COMEDY)
@@ -104,7 +106,10 @@ public class Main {
 //        System.out.println(userService.getAllUsers().toString());
 //        System.out.println(userService.getUserByEmail("imejl.123"));
 
-
+        BookDao bookDao = BookDaoImpl.getInstance();
+        bookDao.addBook(book);
+//            bookDao.borrowBook(1, false);
+        bookDao.removeBook(1);
     }
 
     static void printAllUsers() {

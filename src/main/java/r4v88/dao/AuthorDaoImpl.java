@@ -38,7 +38,7 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public Map<Long, Author> getAllAuthors() {
         Map<Long, Author> authors = new LinkedHashMap<>();
-        Statement statement = null;
+        Statement statement;
 
         try {
             statement = connection.createStatement();
@@ -69,7 +69,7 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public void addAuthor(Author author) {
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         try {
             String query = "insert into " + TABLE_NAME + "(name, lastname, dateofbirth) values (?, ?, ?)";
 
@@ -90,7 +90,7 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public void removeAuthorById(Long id) {
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         try {
             String query = "delete from " + TABLE_NAME + " where id = ?";
 

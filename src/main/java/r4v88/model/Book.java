@@ -3,27 +3,29 @@ package r4v88.model;
 import r4v88.model.enums.Type;
 
 public class Book {
-    private long id;
     private String title;
-    private String isbn;
+    private int isbn;
     private String publisher;
     private String year;
     private Type type;
+    private boolean isBorrowed;
 
-    private Book(String title, String isbn, String publisher, String year, Type type) {
+    private Book(String title, int isbn, String publisher, String year, Type type, boolean isBorrowed) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
         this.year = year;
         this.type = type;
+        this.isBorrowed = isBorrowed;
     }
 
     public static class Builder {
         private String title;
-        private String isbn;
+        private int isbn;
         private String publisher;
         private String year;
         private Type type;
+        private boolean isBorrowed;
 
         public Builder() {
         }
@@ -33,7 +35,7 @@ public class Book {
             return this;
         }
 
-        public Builder setIsbn(String isbn) {
+        public Builder setIsbn(int isbn) {
             this.isbn = isbn;
             return this;
         }
@@ -53,20 +55,21 @@ public class Book {
             return this;
         }
 
-        public Book build() {
-            return new Book(title, isbn, publisher, year, type);
+        public Builder setIsBorrowed(boolean isBorrowed){
+            this.isBorrowed = isBorrowed;
+            return this;
         }
-    }
 
-    public long getId() {
-        return id;
+        public Book build() {
+            return new Book(title, isbn, publisher, year, type, isBorrowed);
+        }
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getIsbn() {
+    public int getIsbn() {
         return isbn;
     }
 
@@ -82,15 +85,19 @@ public class Book {
         return type;
     }
 
+    public boolean isBorrowed() {
+        return isBorrowed;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", year='" + year + '\'' +
-                ", bookType=" + type +
+                ", type=" + type +
+                ", isBorrowed=" + isBorrowed +
                 '}';
     }
 }
