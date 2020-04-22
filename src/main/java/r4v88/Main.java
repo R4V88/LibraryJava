@@ -38,13 +38,15 @@ public class Main {
                 .setRole(Role.ADMIN)
                 .build();
 
-        Book book = new Book.Builder()
-                .setTitle("title")
-                .setIsbn(123124123)
-                .setPublisher("YES")
-                .setYear("12398")
-                .setType(Type.COMEDY)
+
+        Book book = Book.builder()
+                .title("title")
+                .isbn(123124123)
+                .publisher("YES")
+                .year("12398")
+                .type(Type.COMEDY)
                 .build();
+
 
 //        System.out.println(book.getId());
 
