@@ -3,6 +3,8 @@ package r4v88.model;
 import r4v88.model.enums.Gender;
 import r4v88.model.enums.Role;
 
+import java.util.Objects;
+
 public class User {
 
     private String name;
@@ -141,5 +143,25 @@ public class User {
                 ", gender=" + gender +
                 ", role=" + role +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(name, user.name) &&
+                Objects.equals(lastname, user.lastname) &&
+                Objects.equals(login, user.login) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(dateOfBirth, user.dateOfBirth) &&
+                gender == user.gender &&
+                role == user.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, lastname, login, email, password, dateOfBirth, gender, role);
     }
 }
