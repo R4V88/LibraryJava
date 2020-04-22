@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws UserWithIdDoesNotExist, UserWithNameAndLastNameDoesNotExist, UserWithEmailDoesNotExist, UserWithLoginEmailAlreadyExist, DateOfBirthIsNotValid, LoginIsNotValid, PasswordIsNotValid, EmailIsNotValid, UserWithLoginDoesNotExist {
-        User wacek = new User.Builder()
+        User wacek = User.uilder()
                 .setName("tak")
                 .setLastname("nie")
                 .setLogin("wacek2")
