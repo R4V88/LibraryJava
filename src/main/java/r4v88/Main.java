@@ -1,6 +1,7 @@
 package r4v88;
 
 import r4v88.api.BookDao;
+import r4v88.api.BookService;
 import r4v88.api.UserService;
 import r4v88.dao.BookDaoImpl;
 import r4v88.exception.*;
@@ -10,6 +11,7 @@ import r4v88.model.User;
 import r4v88.model.enums.Gender;
 import r4v88.model.enums.Role;
 import r4v88.model.enums.Type;
+import r4v88.service.BookServiceImpl;
 import r4v88.service.UserServiceImpl;
 
 import java.util.Map;
@@ -97,7 +99,7 @@ public class Main {
 //                .setName("Korek")
 //                .setGender(Gender.MALE)
 //                .build());
-        printAllUsers();
+//        printAllUsers();
 //        userService.removeUserByLogin("Korek123");
 //        printAllUsers();
 
@@ -110,10 +112,13 @@ public class Main {
 //        System.out.println(userService.getAllUsers().toString());
 //        System.out.println(userService.getUserByEmail("imejl.123"));
 
-        BookDao bookDao = BookDaoImpl.getInstance();
-        bookDao.addBook(book);
-//            bookDao.borrowBook(1, false);
-        bookDao.removeBook(1);
+//        BookDao bookDao = BookDaoImpl.getInstance();
+//        bookDao.addBook(book);
+////            bookDao.borrowBook(1, false);
+//        bookDao.removeBook(1);
+
+        BookService bookService = BookServiceImpl.getInastance();
+        System.out.println(bookService.getBookById(100));
     }
 
     static void printAllUsers() {

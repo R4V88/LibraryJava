@@ -29,26 +29,46 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book getBookById(long id) {
         Book book = null;
-        for (Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()) {
-            if (bookFromDB.getKey() == id) {
-                book = bookFromDB.getValue();
+            for (Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()) {
+                if (bookFromDB.getKey() == id) {
+                    book = bookFromDB.getValue();
+                } else {
+                    throw new RuntimeException("Book with id: " + id + " does not exist");
+                }
             }
-        }
-        return book;
+            return book;
     }
 
     @Override
     public void addBook(Book book) {
-        bookDao.addBook(book);
+        for (Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()) {
+            if(!bookFromDB.getValue().equals(book)) {
+                bookDao.addBook(book);
+            } else {
+                throw new RuntimeException("Book: " + book.getTitle() + " already exists!");
+            }
+        }
     }
 
     @Override
     public void removeBook(long id) {
-        bookDao.removeBook(id);
+        for(Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()){
+            if(bookFromDB.getKey() == id) {
+                bookDao.removeBook(id);
+            } else {
+                throw new RuntimeException("Book with id: " + id + " does not exist!");
+            }
+        }
     }
 
     @Override
     public void borrowBook(long id, boolean borrow) {
-        bookDao.borrowBook(id, borrow);
+        for(Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()){
+            if(!bookFromDB.getValue().isBorrowed()) {
+                bookDao.borrowBook(id, borrow);
+            } else {
+                throw new RuntimeException("Book " + bookFromDB.getValue().getTitle() + " is already borrowed :'(");
+            }
+        }
     }
 }

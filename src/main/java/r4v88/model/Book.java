@@ -2,6 +2,8 @@ package r4v88.model;
 
 import r4v88.model.enums.Type;
 
+import java.util.Objects;
+
 public class Book {
     private String title;
     private int isbn;
@@ -99,5 +101,23 @@ public class Book {
                 ", type=" + type +
                 ", isBorrowed=" + isBorrowed +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return isbn == book.isbn &&
+                isBorrowed == book.isBorrowed &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(publisher, book.publisher) &&
+                Objects.equals(year, book.year) &&
+                type == book.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, isbn, publisher, year, type, isBorrowed);
     }
 }

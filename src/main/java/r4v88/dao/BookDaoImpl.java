@@ -67,7 +67,7 @@ public class BookDaoImpl implements BookDao {
 
         try {
             statement = connection.createStatement();
-            String query = "select * from" + TABLE_NAME;
+            String query = "select * from " + TABLE_NAME;
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
@@ -79,6 +79,8 @@ public class BookDaoImpl implements BookDao {
                         .setType(bookParser.stringToEnum(resultSet.getString("type")))
                         .setIsBorrowed(resultSet.getBoolean("isborrowed"))
                         .build();
+
+                idBookMap.put(resultSet.getLong("id"), book);
             }
 
         } catch (SQLException e) {
