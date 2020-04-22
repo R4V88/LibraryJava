@@ -8,14 +8,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class AuthorDaoImpl implements AuthorDao {
+    private static AuthorDao instance = new AuthorDaoImpl();
 
-    private final String DATABASE_NAME = "library";
-    private final String TABLE_NAME = "authors";
     private final String USER = "root";
     private final String PASSWORD = "root";
-    private Connection connection;
 
-    private static AuthorDao instance = new AuthorDaoImpl();
+    private Connection connection;
 
     public static AuthorDao getInstance() {
         return AuthorDaoImpl.instance;
@@ -29,7 +27,9 @@ public class AuthorDaoImpl implements AuthorDao {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost/" + DATABASE_NAME + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", USER, PASSWORD);
+                    .getConnection("jdbc:mysql://localhost/library" +
+                                    "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+                            USER, PASSWORD);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,13 +38,14 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public Map<Long, Author> getAllAuthors() {
         Map<Long, Author> authors = new LinkedHashMap<>();
-        Statement statement;
+
+        PreparedStatement preparedStatement;
 
         try {
-            statement = connection.createStatement();
-            String query = "select * from " + TABLE_NAME;
+            String query = "select * from authors";
+            preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
@@ -59,7 +60,7 @@ public class AuthorDaoImpl implements AuthorDao {
 
                 authors.put(id, author);
             }
-            statement.close();
+            preparedStatement.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,7 +72,7 @@ public class AuthorDaoImpl implements AuthorDao {
     public void addAuthor(Author author) {
         PreparedStatement preparedStatement;
         try {
-            String query = "insert into " + TABLE_NAME + "(name, lastname, dateofbirth) values (?, ?, ?)";
+            String query = "insert into authors (name, lastname, dateofbirth) values (?, ?, ?)";
 
             preparedStatement = connection.prepareStatement(query);
 
@@ -92,7 +93,7 @@ public class AuthorDaoImpl implements AuthorDao {
     public void removeAuthorById(Long id) {
         PreparedStatement preparedStatement;
         try {
-            String query = "delete from " + TABLE_NAME + " where id = ?";
+            String query = "delete from authors where id = ?";
 
             preparedStatement = connection.prepareStatement(query);
 

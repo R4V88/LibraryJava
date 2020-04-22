@@ -1,7 +1,10 @@
 package r4v88;
 
+import r4v88.api.AuthorDao;
+import r4v88.api.AuthorService;
 import r4v88.api.BookDao;
 import r4v88.api.UserService;
+import r4v88.dao.AuthorDaoImpl;
 import r4v88.dao.BookDaoImpl;
 import r4v88.exception.*;
 import r4v88.model.Author;
@@ -10,6 +13,7 @@ import r4v88.model.User;
 import r4v88.model.enums.Gender;
 import r4v88.model.enums.Role;
 import r4v88.model.enums.Type;
+import r4v88.service.AuthorServiceImpl;
 import r4v88.service.UserServiceImpl;
 
 import java.util.Map;
@@ -114,6 +118,13 @@ public class Main {
         bookDao.addBook(book);
 //            bookDao.borrowBook(1, false);
         bookDao.removeBook(1);
+
+
+        AuthorDao authorDao = AuthorDaoImpl.getInstance();
+//        authorDao.getAllAuthors();
+        authorDao.addAuthor(new Author.Builder().setName("Ken").setLastname("Follet").setDateOfBirth("19.08.1947").build());
+        printAllAuthors();
+
     }
 
     static void printAllUsers() {
@@ -121,6 +132,13 @@ public class Main {
         Map<Long, User> longUserMap = userService.getAllUsers();
         for (Map.Entry<Long, User> longUserEntry : longUserMap.entrySet()) {
             System.out.println(longUserEntry.getKey() + " " + longUserEntry.getValue());
+        }
+    }
+    static void printAllAuthors() {
+        AuthorService userService = AuthorServiceImpl.getInstance();
+        Map<Long, Author> longAuthorMap = userService.getAllAuthors();
+        for (Map.Entry<Long, Author> longAuthorEntry : longAuthorMap.entrySet()) {
+            System.out.println(longAuthorEntry.getKey() + " " + longAuthorEntry.getValue());
         }
     }
 }
