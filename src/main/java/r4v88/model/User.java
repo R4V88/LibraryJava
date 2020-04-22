@@ -35,20 +35,6 @@ public class User {
         private Gender gender;
         private Role role;
 
-        /*
-            Konstruktor parametrowy nie ma sensu bo w ten sposob wprowadzamy parametry jak bezposrednio w konstruktorze
-            parametryzowanym dla klasy.
-        */
-//        public Builder(String name, String lastname, String login, String email, String password, String gender, String dateOfBirth) {
-//            this.name = name;
-//            this.lastname = lastname;
-//            this.login = login;
-//            this.email = email;
-//            this.password = password;
-//            this.gender = gender;
-//            this.dateOfBirth = dateOfBirth;
-//        }
-
         public Builder() {
         }
 
