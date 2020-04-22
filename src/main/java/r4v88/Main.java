@@ -1,7 +1,7 @@
 package r4v88;
 
-import r4v88.api.BookDao;
-import r4v88.api.UserService;
+import r4v88.dao.BookDao;
+import r4v88.service.UserService;
 import r4v88.dao.BookDaoImpl;
 import r4v88.exception.*;
 import r4v88.model.Author;

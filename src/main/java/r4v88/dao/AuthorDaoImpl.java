@@ -1,6 +1,5 @@
 package r4v88.dao;
 
-import r4v88.api.AuthorDao;
 import r4v88.model.Author;
 
 import java.sql.*;

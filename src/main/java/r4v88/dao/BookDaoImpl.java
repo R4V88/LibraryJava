@@ -1,6 +1,5 @@
 package r4v88.dao;
 
-import r4v88.api.BookDao;
 import r4v88.model.Book;
 import r4v88.model.parser.BookParser;
 

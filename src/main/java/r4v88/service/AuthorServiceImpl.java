@@ -1,7 +1,6 @@
 package r4v88.service;
 
-import r4v88.api.AuthorDao;
-import r4v88.api.AuthorService;
+import r4v88.dao.AuthorDao;
 import r4v88.dao.AuthorDaoImpl;
 import r4v88.model.Author;
 

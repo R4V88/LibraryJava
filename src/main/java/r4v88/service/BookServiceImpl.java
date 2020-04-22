@@ -1,7 +1,6 @@
 package r4v88.service;
 
-import r4v88.api.BookDao;
-import r4v88.api.BookService;
+import r4v88.dao.BookDao;
 import r4v88.dao.BookDaoImpl;
 import r4v88.model.Book;
 

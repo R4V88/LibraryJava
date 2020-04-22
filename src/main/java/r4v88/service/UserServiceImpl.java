@@ -1,7 +1,6 @@
 package r4v88.service;
 
-import r4v88.api.UserDao;
-import r4v88.api.UserService;
+import r4v88.dao.UserDao;
 import r4v88.dao.UserDaoImpl;
 import r4v88.exception.*;
 import r4v88.model.User;

@@ -1,4 +1,4 @@
-package r4v88.api;
+package r4v88.service;
 
 import r4v88.exception.*;
 import r4v88.model.User;
