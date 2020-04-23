@@ -2,6 +2,7 @@ package r4v88.dao;
 
 import r4v88.api.UserDao;
 import r4v88.model.User;
+import r4v88.model.entity.UserRole;
 import r4v88.model.parser.UserParser;
 
 import java.sql.*;
@@ -18,6 +19,7 @@ public class UserDaoImpl implements UserDao {
     private final String USER = "root";
     private final String PASSWORD = "root";
 
+    private UserRoleDao userRoleDao = UserRoleDaoImpl.getInstance();
     private UserParser userParser = UserParser.getInstance();
 
     public static UserDao getInstance() {
@@ -57,6 +59,7 @@ public class UserDaoImpl implements UserDao {
                 String password = resultSet.getString("password");
                 String dateOfBirth = resultSet.getString("dateofbirth");
                 String gender = resultSet.getString("gender");
+                UserRole userRole = userRoleDao.getRoleById(id);
 
                 User user = User.builder()
                         .name(name)
@@ -66,6 +69,7 @@ public class UserDaoImpl implements UserDao {
                         .password(password)
                         .dateOfBirth(dateOfBirth)
                         .gender(userParser.stringToEnum(gender))
+                        .userRole(userRole)
                         .build();
 
                 users.put(id, user);
@@ -81,7 +85,8 @@ public class UserDaoImpl implements UserDao {
     public void insertUser(User user) {
         PreparedStatement preparedStatement = null;
         try {
-            String query = "insert into " + TABLE_NAME + " (name, lastname, login, email, password, dateOfBirth, gender) values (?, ?, ?, ?, ?, ?, ?)";
+            String query = "insert into " + TABLE_NAME + " (name, lastname, login, email, password, dateOfBirth, gender, user_role_id) " +
+                    "values (?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, user.getName());
@@ -91,6 +96,7 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(5, user.getPassword());
             preparedStatement.setString(6, user.getDateOfBirth());
             preparedStatement.setString(7, user.getGender().toString().toLowerCase());
+            preparedStatement.setString(8, user.getUserRole().toString().toLowerCase());
 
 
             preparedStatement.execute();

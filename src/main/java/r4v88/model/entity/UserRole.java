@@ -10,6 +10,6 @@ import r4v88.model.enums.Role;
 @ToString
 @EqualsAndHashCode
 public class UserRole {
-    private int id;
+    private long id;
     @NonNull private Role role;
 }

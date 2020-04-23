@@ -8,15 +8,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UserRoleDaoImpl implements UserRoleDao {
-    
-   private static UserRoleDao instance = new UserRoleDaoImpl();
+
+    private static UserRoleDao instance = new UserRoleDaoImpl();
 
     private Connection connection;
     private final String TABLE_NAME = "users";
     private final String USER = "root";
     private final String PASSWORD = "root";
-    
-    
+
 
     private UserRoleDaoImpl() {
         init();
@@ -27,7 +26,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager
                     .getConnection("jdbc:mysql://localhost/library" +
-                            "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
+                                    "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC",
                             USER, PASSWORD);
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,14 +66,14 @@ public class UserRoleDaoImpl implements UserRoleDao {
     }
 
     @Override
-    public UserRole getRoleByID(int id) {
+    public UserRole getRoleById(long id) {
         PreparedStatement preparedStatement;
         try {
             String query = "select * from ? where id = ?";
-           preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement(query);
 
-           preparedStatement.setString(1, TABLE_NAME);
-           preparedStatement.setInt(2, id);
+            preparedStatement.setString(1, TABLE_NAME);
+            preparedStatement.setLong(2, id);
 
             ResultSet resultSet = preparedStatement.executeQuery(query);
 

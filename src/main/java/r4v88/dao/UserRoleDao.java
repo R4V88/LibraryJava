@@ -8,7 +8,7 @@ public interface UserRoleDao {
 
     List<UserRole> getAllUsers();
 
-    UserRole getRoleByID(int id);
+    UserRole getRoleById(long id);
 
     int getRoleIdByName(String roleName);
 }
