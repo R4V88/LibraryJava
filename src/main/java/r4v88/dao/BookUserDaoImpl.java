@@ -1,28 +1,28 @@
 package r4v88.dao;
 
-import r4v88.model.entity.UserRole;
-import r4v88.model.enums.Role;
+import r4v88.model.Book;
+import r4v88.model.entity.BookUser;
+import r4v88.model.enums.Type;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class UserRoleDaoImpl implements UserRoleDao {
+public class BookUserDaoImpl implements BookUserDao {
 
-    private static UserRoleDao instance = new UserRoleDaoImpl();
+    private static BookUserDao instance = new BookUserDaoImpl();
 
     private Connection connection;
-    private final String TABLE_NAME = "roles";
+    private final String TABLE_NAME = "books";
     private final String USER = "root";
     private final String PASSWORD = "root";
 
-
-    private UserRoleDaoImpl() {
+    private BookUserDaoImpl() {
         init();
     }
 
-    public static UserRoleDao getInstance() {
-        return UserRoleDaoImpl.instance;
+    public static BookUserDao getInstance() {
+        return BookUserDaoImpl.instance;
     }
 
     private void init() {
@@ -38,12 +38,11 @@ public class UserRoleDaoImpl implements UserRoleDao {
     }
 
     @Override
-    public List<UserRole> getAllUsers() {
-        List<UserRole> userRoles = new LinkedList<>();
+    public List<BookUser> getAllUsers() {
+        List<BookUser> bookUsers = new LinkedList<>();
         PreparedStatement preparedStatement;
         try {
             String query = "select * from ?";
-
             preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, TABLE_NAME);
@@ -51,22 +50,33 @@ public class UserRoleDaoImpl implements UserRoleDao {
             ResultSet resultSet = preparedStatement.executeQuery(query);
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("role");
+                long id = resultSet.getLong("id");
+                String title = resultSet.getString("title");
+                int isbn = resultSet.getInt("isbn");
+                String publisher = resultSet.getString("publisher");
+                String year = resultSet.getString("year");
+                Type type = Type.valueOf(resultSet.getString("type"));
+                boolean isBorrowed = resultSet.getBoolean("isborrowed");
 
-
-                userRoles.add(new UserRole(id, Role.valueOf(name)));
+                bookUsers.add(new BookUser(id, Book.builder()
+                        .isBorrowed(isBorrowed)
+                        .type(type)
+                        .year(year)
+                        .publisher(publisher)
+                        .title(title)
+                        .isbn(isbn)
+                        .build()));
             }
-            preparedStatement.close();
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return userRoles;
+        return bookUsers;
     }
 
     @Override
-    public UserRole getRoleById(long id) {
+    public BookUser getBookById(long id) {
         PreparedStatement preparedStatement;
         try {
             String query = "select * from ? where id = ?";
@@ -78,27 +88,26 @@ public class UserRoleDaoImpl implements UserRoleDao {
             ResultSet resultSet = preparedStatement.executeQuery(query);
 
             while (resultSet.next()) {
-                String role = resultSet.getString("role");
-                Role userRole = Role.valueOf(role);
-                return new UserRole(id, userRole);
+                Book book = (Book) resultSet.getObject("book");
+                return new BookUser(id, book);
             }
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
     @Override
-    public int getRoleIdByName(String roleName) {
+    public long getBookIdByName(String bookName) {
         PreparedStatement preparedStatement;
         try {
-            String query = "select * from ? where role = ?";
+            String query = "select * from ? where bookName = ?";
+
             preparedStatement = connection.prepareStatement(query);
 
             preparedStatement.setString(1, TABLE_NAME);
-            preparedStatement.setString(2, roleName);
+            preparedStatement.setString(2, bookName);
 
             ResultSet resultSet = preparedStatement.executeQuery(query);
 

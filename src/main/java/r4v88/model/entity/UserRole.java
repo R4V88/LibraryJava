@@ -11,5 +11,7 @@ import r4v88.model.enums.Role;
 @EqualsAndHashCode
 public class UserRole {
     private long id;
-    @NonNull private Role role;
+
+    @NonNull
+    private Role role;
 }
