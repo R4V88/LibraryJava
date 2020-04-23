@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     public Map<Long, User> getUsersByRole(Role role) {
         Map<Long, User> usersByRole = new LinkedHashMap<>();
         for (Map.Entry<Long, User> search : idUserMap.entrySet()) {
-            if (search.getValue().getRole().equals(role)) {
+            if (search.getValue().getUserRole().getRole().equals(role)) {
                 usersByRole.put(search.getKey(), search.getValue());
             }
         }

@@ -5,11 +5,11 @@ import r4v88.model.entity.UserRole;
 import r4v88.model.enums.Gender;
 import r4v88.model.enums.Role;
 
-@Builder
 @Getter
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Builder
 public class User {
 
     private String name;
@@ -21,3 +21,6 @@ public class User {
     private Gender gender;
     private UserRole userRole;
 }
+
+
+
