@@ -2,6 +2,7 @@ package r4v88.dao;
 
 import r4v88.api.BookDao;
 import r4v88.model.Book;
+import r4v88.model.enums.Type;
 import r4v88.model.parser.BookParser;
 
 import java.sql.*;
@@ -15,8 +16,6 @@ public class BookDaoImpl implements BookDao {
     private final String TABLE_NAME = "books";
     private final String USER = "root";
     private final String PASSWORD = "root";
-
-    private BookParser bookParser = BookParser.getInstance();
 
     private static BookDao instance = new BookDaoImpl();
 
@@ -76,7 +75,7 @@ public class BookDaoImpl implements BookDao {
                         .setIsbn(resultSet.getInt("isbn"))
                         .setPublisher(resultSet.getString("publisher"))
                         .setYear(resultSet.getString("year"))
-                        .setType(bookParser.stringToEnum(resultSet.getString("type")))
+                        .setType(Type.valueOf(resultSet.getString("type")))
                         .setIsBorrowed(resultSet.getBoolean("isborrowed"))
                         .build();
             }
