@@ -2,6 +2,7 @@ package r4v88.dao;
 
 import r4v88.api.UserDao;
 import r4v88.model.User;
+import r4v88.model.enums.Gender;
 import r4v88.model.parser.UserParser;
 
 import java.sql.*;
@@ -17,8 +18,6 @@ public class UserDaoImpl implements UserDao {
     private final String TABLE_NAME = "users";
     private final String USER = "root";
     private final String PASSWORD = "root";
-
-    private UserParser userParser = UserParser.getInstance();
 
     public static UserDao getInstance() {
         return UserDaoImpl.instance;
@@ -58,14 +57,14 @@ public class UserDaoImpl implements UserDao {
                 String dateOfBirth = resultSet.getString("dateofbirth");
                 String gender = resultSet.getString("gender");
 
-                User user = new User.Builder()
-                        .setName(name)
-                        .setLastname(lastname)
-                        .setLogin(login)
-                        .setEmail(email)
-                        .setPassword(password)
-                        .setDateOfBirth(dateOfBirth)
-                        .setGender(userParser.stringToEnum(gender))
+                User user = User.builder()
+                        .name(name)
+                        .lastname(lastname)
+                        .login(login)
+                        .email(email)
+                        .password(password)
+                        .dateOfBirth(dateOfBirth)
+                        .gender(Gender.valueOf(gender))
                         .build();
 
                 users.put(id, user);
