@@ -1,5 +1,6 @@
-package r4v88.dao;
+package r4v88.dao.impl;
 
+import r4v88.dao.UserDao;
 import r4v88.model.User;
 import r4v88.model.parser.UserParser;
 

@@ -2,7 +2,7 @@ package r4v88;
 
 import r4v88.dao.BookDao;
 import r4v88.service.UserService;
-import r4v88.dao.BookDaoImpl;
+import r4v88.dao.impl.BookDaoImpl;
 import r4v88.exception.*;
 import r4v88.model.Author;
 import r4v88.model.Book;
@@ -10,7 +10,7 @@ import r4v88.model.User;
 import r4v88.model.enums.Gender;
 import r4v88.model.enums.Role;
 import r4v88.model.enums.Type;
-import r4v88.service.UserServiceImpl;
+import r4v88.service.impl.UserServiceImpl;
 
 import java.util.Map;
 

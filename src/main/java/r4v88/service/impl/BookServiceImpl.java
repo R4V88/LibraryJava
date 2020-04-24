@@ -1,8 +1,9 @@
-package r4v88.service;
+package r4v88.service.impl;
 
 import r4v88.dao.BookDao;
-import r4v88.dao.BookDaoImpl;
+import r4v88.dao.impl.BookDaoImpl;
 import r4v88.model.Book;
+import r4v88.service.BookService;
 
 import java.util.Map;
 
