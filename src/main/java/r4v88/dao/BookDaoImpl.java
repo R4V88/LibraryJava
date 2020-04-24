@@ -70,14 +70,16 @@ public class BookDaoImpl implements BookDao {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                Book book = new Book.Builder()
-                        .setTitle(resultSet.getString("title"))
-                        .setIsbn(resultSet.getInt("isbn"))
-                        .setPublisher(resultSet.getString("publisher"))
-                        .setYear(resultSet.getString("year"))
-                        .setType(Type.valueOf(resultSet.getString("type")))
-                        .setIsBorrowed(resultSet.getBoolean("isborrowed"))
+                Book book = Book.builder()
+                        .title(resultSet.getString("title"))
+                        .isbn(resultSet.getInt("isbn"))
+                        .publisher(resultSet.getString("publisher"))
+                        .year(resultSet.getString("year"))
+                        .type(Type.valueOf(resultSet.getString("type")))
+                        .isBorrowed(resultSet.getBoolean("isborrowed"))
                         .build();
+
+                idBookMap.put(resultSet.getLong("id") , book);
             }
 
         } catch (SQLException e) {

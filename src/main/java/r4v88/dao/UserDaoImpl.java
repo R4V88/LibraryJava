@@ -57,14 +57,14 @@ public class UserDaoImpl implements UserDao {
                 String dateOfBirth = resultSet.getString("dateofbirth");
                 String gender = resultSet.getString("gender");
 
-                User user = new User.Builder()
-                        .setName(name)
-                        .setLastname(lastname)
-                        .setLogin(login)
-                        .setEmail(email)
-                        .setPassword(password)
-                        .setDateOfBirth(dateOfBirth)
-                        .setGender(Gender.valueOf(gender))
+                User user = User.builder()
+                        .name(name)
+                        .lastname(lastname)
+                        .login(login)
+                        .email(email)
+                        .password(password)
+                        .dateOfBirth(dateOfBirth)
+                        .gender(Gender.valueOf(gender))
                         .build();
 
                 users.put(id, user);
