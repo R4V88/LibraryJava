@@ -1,8 +1,10 @@
-package r4v88.dao;
+package r4v88.dao.impl;
 
-import r4v88.api.UserDao;
+import r4v88.dao.UserDao;
+import r4v88.dao.UserRoleDao;
 import r4v88.model.User;
 import r4v88.model.entity.UserRole;
+import r4v88.model.enums.Gender;
 import r4v88.model.parser.UserParser;
 
 import java.sql.*;
@@ -68,8 +70,8 @@ public class UserDaoImpl implements UserDao {
                         .email(email)
                         .password(password)
                         .dateOfBirth(dateOfBirth)
-                        .gender(userParser.stringToEnum(gender))
                         .userRole(userRole)
+                        .gender(Gender.valueOf(gender))
                         .build();
 
                 users.put(id, user);

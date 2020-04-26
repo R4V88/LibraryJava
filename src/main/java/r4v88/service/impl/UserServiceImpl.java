@@ -1,11 +1,11 @@
-package r4v88.service;
+package r4v88.service.impl;
 
-import r4v88.api.UserDao;
-import r4v88.api.UserService;
-import r4v88.dao.UserDaoImpl;
+import r4v88.dao.UserDao;
+import r4v88.dao.impl.UserDaoImpl;
 import r4v88.exception.*;
 import r4v88.model.User;
 import r4v88.model.enums.Role;
+import r4v88.service.UserService;
 import r4v88.validator.UserValidator;
 
 import java.util.LinkedHashMap;

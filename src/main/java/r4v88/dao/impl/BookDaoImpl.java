@@ -1,6 +1,6 @@
-package r4v88.dao;
+package r4v88.dao.impl;
 
-import r4v88.api.BookDao;
+import r4v88.dao.BookDao;
 import r4v88.model.Book;
 import r4v88.model.enums.Type;
 import r4v88.model.parser.BookParser;
@@ -16,8 +16,6 @@ public class BookDaoImpl implements BookDao {
     private final String TABLE_NAME = "books";
     private final String USER = "root";
     private final String PASSWORD = "root";
-
-    private BookParser bookParser = BookParser.getInstance();
 
     private static BookDao instance = new BookDaoImpl();
 
@@ -80,6 +78,8 @@ public class BookDaoImpl implements BookDao {
                         .type(Type.valueOf(resultSet.getString("type")))
                         .isBorrowed(resultSet.getBoolean("isborrowed"))
                         .build();
+
+                idBookMap.put(resultSet.getLong("id") , book);
             }
 
         } catch (SQLException e) {

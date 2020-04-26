@@ -2,8 +2,11 @@ package r4v88.model;
 
 import lombok.*;
 import r4v88.model.entity.UserRole;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 import r4v88.model.enums.Gender;
-import r4v88.model.enums.Role;
 
 @Getter
 @AllArgsConstructor
@@ -11,7 +14,6 @@ import r4v88.model.enums.Role;
 @EqualsAndHashCode
 @Builder
 public class User {
-
     private String name;
     private String lastname;
     private String login;
@@ -21,6 +23,3 @@ public class User {
     private Gender gender;
     private UserRole userRole;
 }
-
-
-
