@@ -1,92 +1,73 @@
 package r4v88;
 
-import r4v88.api.AuthorService;
-import r4v88.api.BookService;
-import r4v88.api.UserService;
+import r4v88.service.AuthorService;
+import r4v88.service.UserService;
 import r4v88.model.Author;
 import r4v88.model.Book;
 import r4v88.model.User;
 import r4v88.model.enums.Gender;
 import r4v88.model.enums.Role;
 import r4v88.model.enums.Type;
-import r4v88.service.AuthorServiceImpl;
-import r4v88.service.BookServiceImpl;
-import r4v88.service.UserServiceImpl;
+import r4v88.service.impl.AuthorServiceImpl;
+import r4v88.service.impl.UserServiceImpl;
 
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        User wacek = new User.Builder()
-                .setName("tak")
-                .setLastname("nie")
-                .setLogin("wacek2")
-                .setPassword("1Ab*45678")
-                .setDateOfBirth("11.08.2018")
-                .setEmail("email@gmail.mail")
-                .setGender(Gender.MALE)
-                .setRole(Role.USER)
+        User wacek = User.builder()
+                .name("tak")
+                .lastname("nie")
+                .login("wacek2")
+                .password("1Ab*45678")
+                .dateOfBirth("11.08.2018")
+                .email("email@gmail.mail")
+                .gender(Gender.MALE)
+                .role(Role.USER)
                 .build();
 
-        User marek = new User.Builder()
-                .setName("marek")
-                .setLastname("jest")
-                .setLogin("marekk")
-                .setPassword("1Ab*45678")
-                .setDateOfBirth("11.10.1994")
-                .setEmail("email@dzimejl.mail")
-                .setGender(Gender.FEMALE)
-                .setRole(Role.ADMIN)
+        User marek = User.builder()
+                .name("marek")
+                .lastname("jest")
+                .login("marekk")
+                .password("1Ab*45678")
+                .dateOfBirth("11.10.1994")
+                .email("email@dzimejl.mail")
+                .gender(Gender.FEMALE)
+                .role(Role.ADMIN)
                 .build();
 
-        Book book = new Book.Builder()
-                .setTitle("title")
-                .setIsbn(123124123)
-                .setPublisher("YES")
-                .setYear("12398")
-                .setType(Type.COMEDY)
+        Book book = Book.builder()
+                .title("title")
+                .isbn(123124123)
+                .publisher("YES")
+                .year("12398")
+                .type(Type.COMEDY)
                 .build();
 
+        Author ken = new Author("Ken", "Follet", "19.08.1947");
+        Author author = new Author("Name", "LastName", "19.12.2019");
 
-        Author author = new Author.Builder()
-                .setName("Name")
-                .setLastname("LastName")
-                .setDateOfBirth("19.12.2019")
+        User karolek = User.builder()
+                .name("Karolak")
+                .lastname("Worek")
+                .login("loginbb")
+                .email("taki@mejl")
+                .password("1Ab*45678")
+                .dateOfBirth("11.12.2018")
+                .gender(Gender.MALE)
+                .role(Role.USER)
                 .build();
 
-        Author author1 = new Author.Builder()
-                .setName("Ken")
-                .setLastname("Follet")
-                .setDateOfBirth("19.08.1947")
+        User korek = User.builder()
+                .login("Korek123")
+                .lastname("Dębowy")
+                .email("napisz@tutaj")
+                .password("asli*jdD2")
+                .dateOfBirth("11.11.2011")
+                .name("Korek")
+                .gender(Gender.MALE)
                 .build();
-
-
-        User karolek = new User.Builder()
-                .setName("Karolak")
-                .setLastname("Worek")
-                .setLogin("loginbb")
-                .setEmail("taki@mejl")
-                .setPassword("1Ab*45678")
-                .setDateOfBirth("11.12.2018")
-                .setGender(Gender.MALE)
-                .setRole(Role.USER)
-                .build();
-
-        User korek = new User.Builder()
-                .setLogin("Korek123")
-                .setLastname("Dębowy")
-                .setEmail("napisz@tutaj")
-                .setPassword("asli*jdD2")
-                .setDateOfBirth("11.11.2011")
-                .setName("Korek")
-                .setGender(Gender.MALE)
-                .build();
-
-        BookService bookService = BookServiceImpl.getInastance();
-        AuthorService authorService = AuthorServiceImpl.getInstance();
-        UserService userService = UserServiceImpl.getInstance();
-
-
     }
 
     static void printAllUsers() {

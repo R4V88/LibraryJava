@@ -1,7 +1,8 @@
-package r4v88.dao;
+package r4v88.dao.impl;
 
-import r4v88.api.BookDao;
+import r4v88.dao.BookDao;
 import r4v88.model.Book;
+import r4v88.model.enums.Type;
 import r4v88.model.parser.BookParser;
 
 import java.sql.*;
@@ -14,8 +15,6 @@ public class BookDaoImpl implements BookDao {
     private final String TABLE_NAME = "books";
     private final String USER = "root";
     private final String PASSWORD = "root";
-
-    private BookParser bookParser = BookParser.getInstance();
 
     private static BookDao instance = new BookDaoImpl();
 
@@ -76,14 +75,16 @@ public class BookDaoImpl implements BookDao {
             ResultSet resultSet = preparedStatement.executeQuery(query);
 
             while (resultSet.next()) {
-                Book book = new Book.Builder()
-                        .setTitle(resultSet.getString("title"))
-                        .setIsbn(resultSet.getInt("isbn"))
-                        .setPublisher(resultSet.getString("publisher"))
-                        .setYear(resultSet.getString("year"))
-                        .setType(bookParser.stringToEnum(resultSet.getString("type")))
-                        .setIsBorrowed(resultSet.getBoolean("isborrowed"))
+                Book book = Book.builder()
+                        .title(resultSet.getString("title"))
+                        .isbn(resultSet.getInt("isbn"))
+                        .publisher(resultSet.getString("publisher"))
+                        .year(resultSet.getString("year"))
+                        .type(Type.valueOf(resultSet.getString("type")))
+                        .isBorrowed(resultSet.getBoolean("isborrowed"))
                         .build();
+
+                idBookMap.put(resultSet.getLong("id") , book);
             }
 
         } catch (SQLException e) {

@@ -1,6 +1,6 @@
-package r4v88.dao;
+package r4v88.dao.impl;
 
-import r4v88.api.AuthorDao;
+import r4v88.dao.AuthorDao;
 import r4v88.model.Author;
 
 import java.sql.*;
@@ -52,11 +52,7 @@ public class AuthorDaoImpl implements AuthorDao {
                 String lastname = resultSet.getString("lastname");
                 String dateOfBirth = resultSet.getString("dateofbirth");
 
-                Author author = new Author.Builder()
-                        .setName(name)
-                        .setLastname(lastname)
-                        .setDateOfBirth(dateOfBirth)
-                        .build();
+                Author author = new Author(name, lastname, dateOfBirth);
 
                 authors.put(id, author);
             }
