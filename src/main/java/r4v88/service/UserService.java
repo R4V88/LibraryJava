@@ -1,6 +1,6 @@
 package r4v88.service;
 
-import r4v88.exception.*;
+import r4v88.exception.user.*;
 import r4v88.model.User;
 import r4v88.model.enums.Role;
 

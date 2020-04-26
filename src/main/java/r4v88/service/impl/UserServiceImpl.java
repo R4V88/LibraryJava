@@ -2,7 +2,7 @@ package r4v88.service.impl;
 
 import r4v88.dao.UserDao;
 import r4v88.dao.impl.UserDaoImpl;
-import r4v88.exception.*;
+import r4v88.exception.user.*;
 import r4v88.model.User;
 import r4v88.model.enums.Role;
 import r4v88.service.UserService;
@@ -149,18 +149,30 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } else {
-            throw new UserWithEmailDoesNotExistException("User with email = " + email + " does not exist!");
+            throw new UserWithEmailDoesNotExistException("User with email: " + email + " does not exist!");
         }
     }
 
     @Override
     public void updateUserName(String name, long id) {
-        userDao.updateUserName(name, id);
+        for(Map.Entry<Long, User> userEntry : idUserMap.entrySet()){
+            if(userEntry.getKey() == id) {
+                userDao.updateUserName(name, id);
+            } else {
+                throw new UserWithIdDoesNotExistException("User with id: " + id + " does not exist!" );
+            }
+        }
     }
 
     @Override
     public void updateUserLastname(String lastname, long id) {
-        userDao.updateUserLastname(lastname, id);
+        for(Map.Entry<Long,User> userEntry : idUserMap.entrySet())  {
+            if(userEntry.getKey() == id) {
+                userDao.updateUserLastname(lastname, id);
+            } else {
+                throw new UserWithIdDoesNotExistException("User with id: " + id + " does not exist!" );
+            }
+        }
     }
 
     @Override

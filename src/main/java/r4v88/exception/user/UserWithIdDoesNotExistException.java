@@ -1,4 +1,4 @@
-package r4v88.exception;
+package r4v88.exception.user;
 
 public class UserWithIdDoesNotExistException extends RuntimeException {
     public UserWithIdDoesNotExistException(String message) {

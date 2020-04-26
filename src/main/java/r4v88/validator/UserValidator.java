@@ -1,9 +1,9 @@
 package r4v88.validator;
 
-import r4v88.exception.DateOfBirthIsNotValidException;
-import r4v88.exception.EmailIsNotValidException;
-import r4v88.exception.LoginIsNotValidException;
-import r4v88.exception.PasswordIsNotValidException;
+import r4v88.exception.user.DateOfBirthIsNotValidException;
+import r4v88.exception.user.EmailIsNotValidException;
+import r4v88.exception.user.LoginIsNotValidException;
+import r4v88.exception.user.PasswordIsNotValidException;
 import r4v88.model.User;
 import r4v88.validator.enums.RegexpValidator;
 

@@ -1,7 +1,7 @@
 package r4v88;
 
+import r4v88.exception.user.*;
 import r4v88.service.UserService;
-import r4v88.exception.*;
 import r4v88.model.Author;
 import r4v88.model.Book;
 import r4v88.model.User;
