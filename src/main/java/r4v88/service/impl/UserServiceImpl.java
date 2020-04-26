@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User getUserById(long id) throws UserWithIdDoesNotExistException {
+    public User getUserById(long id) {
         User user = null;
         if (isUserWithIdExist(id)) {
             for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByNameAndLastname(String name, String lastname) throws UserWithNameAndLastNameDoesNotExistException {
+    public User getUserByNameAndLastname(String name, String lastname) {
         User user = null;
         if (isUserWithNameAndLastnameExist(name, lastname)) {
             for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByEmail(String email) throws UserWithEmailDoesNotExistException {
+    public User getUserByEmail(String email) {
         User user;
 
         if (isUserWithEmailExist(email)) {
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByLogin(String login) throws UserWithLoginDoesNotExistException {
+    public User getUserByLogin(String login) {
         User user;
 
         if (isUserWithLoginExist(login)) {
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(User user) throws UserWithLoginEmailAlreadyExistException, DateOfBirthIsNotValidException, LoginIsNotValidException, PasswordIsNotValidException, EmailIsNotValidException {
+    public void createUser(User user) {
         if (!isUserWithLoginExist(user.getLogin()) && !isUserWithEmailExist(user.getEmail()) && userValidator.isUserValid(user)) {
             userDao.insertUser(user);
         } else {
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeUserById(long id) throws UserWithIdDoesNotExistException {
+    public void removeUserById(long id) {
         if (isUserWithIdExist(id)) {
             userDao.removeUserById(id);
         } else {
@@ -128,7 +128,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeUserByLogin(String login) throws UserWithLoginDoesNotExistException {
+    public void removeUserByLogin(String login) {
         if (isUserWithLoginExist(login)) {
             for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
                 if (login.equals(users.getValue().getLogin())) {
@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeUserByEmail(String email) throws UserWithEmailDoesNotExistException {
+    public void removeUserByEmail(String email) {
         if (isUserWithEmailExist(email)) {
             for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
                 if (email.equals(users.getValue().getEmail())) {
@@ -155,28 +155,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserName(String name, long id) {
-        for(Map.Entry<Long, User> userEntry : idUserMap.entrySet()){
-            if(userEntry.getKey() == id) {
+        for (Map.Entry<Long, User> userEntry : idUserMap.entrySet()) {
+            if (userEntry.getKey() == id) {
                 userDao.updateUserName(name, id);
             } else {
-                throw new UserWithIdDoesNotExistException("User with id: " + id + " does not exist!" );
+                throw new UserWithIdDoesNotExistException("User with id: " + id + " does not exist!");
             }
         }
     }
 
     @Override
     public void updateUserLastname(String lastname, long id) {
-        for(Map.Entry<Long,User> userEntry : idUserMap.entrySet())  {
-            if(userEntry.getKey() == id) {
+        for (Map.Entry<Long, User> userEntry : idUserMap.entrySet()) {
+            if (userEntry.getKey() == id) {
                 userDao.updateUserLastname(lastname, id);
             } else {
-                throw new UserWithIdDoesNotExistException("User with id: " + id + " does not exist!" );
+                throw new UserWithIdDoesNotExistException("User with id: " + id + " does not exist!");
             }
         }
     }
 
     @Override
-    public void updateUserLogin(String login, long id) throws LoginIsNotValidException {
+    public void updateUserLogin(String login, long id) {
         if (userValidator.isLoginValid(login)) {
             userDao.updateUserLogin(login, id);
         } else {
@@ -185,7 +185,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserEmail(String email, long id) throws EmailIsNotValidException {
+    public void updateUserEmail(String email, long id) {
         if (userValidator.isEmailValid(email)) {
             userDao.updateUserEmail(email, id);
         } else {
@@ -194,7 +194,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserPassword(String password, long id) throws PasswordIsNotValidException {
+    public void updateUserPassword(String password, long id) {
         if (userValidator.isPasswordValid(password)) {
             userDao.updateUserPassword(password, id);
         } else {

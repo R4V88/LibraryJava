@@ -1,19 +1,18 @@
 package r4v88;
 
-import r4v88.exception.user.*;
-import r4v88.service.UserService;
 import r4v88.model.Author;
 import r4v88.model.Book;
 import r4v88.model.User;
 import r4v88.model.enums.Gender;
 import r4v88.model.enums.Role;
 import r4v88.model.enums.Type;
+import r4v88.service.UserService;
 import r4v88.service.impl.UserServiceImpl;
 
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws UserWithIdDoesNotExistException, UserWithNameAndLastNameDoesNotExistException, UserWithEmailDoesNotExistException, UserWithLoginEmailAlreadyExistException, DateOfBirthIsNotValidException, LoginIsNotValidException, PasswordIsNotValidException, EmailIsNotValidException, UserWithLoginDoesNotExistException {
+    public static void main(String[] args) {
         User wacek = User.builder()
                 .name("tak")
                 .lastname("nie")

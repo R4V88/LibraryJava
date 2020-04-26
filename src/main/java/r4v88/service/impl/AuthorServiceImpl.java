@@ -85,7 +85,7 @@ public class AuthorServiceImpl implements AuthorService {
             if (authorFromMap.getKey() == id) {
                 authorDao.removeAuthorById(id);
             } else {
-                throw new AuthorDoesNotExistException("Author with id: " + id + " does not exist!");
+                throw new AuthorWithIdDoesNotExistException("Author with id: " + id + " does not exist!");
             }
         }
     }

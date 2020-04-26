@@ -2,6 +2,8 @@ package r4v88.service.impl;
 
 import r4v88.dao.BookDao;
 import r4v88.dao.impl.BookDaoImpl;
+import r4v88.exception.book.BookAlreadyExistException;
+import r4v88.exception.book.BookWithIdDoesNotExistException;
 import r4v88.model.Book;
 import r4v88.service.BookService;
 
@@ -33,7 +35,7 @@ public class BookServiceImpl implements BookService {
                 if (bookFromDB.getKey() == id) {
                     book = bookFromDB.getValue();
                 } else {
-                    throw new RuntimeException("Book with id: " + id + " does not exist");
+                    throw new BookWithIdDoesNotExistException("Book with id: " + id + " does not exist");
                 }
             }
             return book;
@@ -45,7 +47,7 @@ public class BookServiceImpl implements BookService {
             if(!bookFromDB.getValue().equals(book)) {
                 bookDao.addBook(book);
             } else {
-                throw new RuntimeException("Book: " + book.getTitle() + " already exists!");
+                throw new BookAlreadyExistException("Book: " + book.getTitle() + " already exists!");
             }
         }
     }
@@ -56,7 +58,7 @@ public class BookServiceImpl implements BookService {
             if(bookFromDB.getKey() == id) {
                 bookDao.removeBook(id);
             } else {
-                throw new RuntimeException("Book with id: " + id + " does not exist!");
+                throw new BookWithIdDoesNotExistException("Book with id: " + id + " does not exist!");
             }
         }
     }
