@@ -1,9 +1,9 @@
-package r4v88.service;
+package r4v88.service.impl;
 
-import r4v88.api.AuthorDao;
-import r4v88.api.AuthorService;
-import r4v88.dao.AuthorDaoImpl;
+import r4v88.dao.AuthorDao;
+import r4v88.dao.impl.AuthorDaoImpl;
 import r4v88.model.Author;
+import r4v88.service.AuthorService;
 
 import java.util.Map;
 

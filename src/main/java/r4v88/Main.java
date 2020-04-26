@@ -1,9 +1,6 @@
 package r4v88;
 
-import r4v88.api.BookDao;
-import r4v88.api.BookService;
-import r4v88.api.UserService;
-import r4v88.dao.BookDaoImpl;
+import r4v88.service.UserService;
 import r4v88.exception.*;
 import r4v88.model.Author;
 import r4v88.model.Book;
@@ -11,8 +8,7 @@ import r4v88.model.User;
 import r4v88.model.enums.Gender;
 import r4v88.model.enums.Role;
 import r4v88.model.enums.Type;
-import r4v88.service.BookServiceImpl;
-import r4v88.service.UserServiceImpl;
+import r4v88.service.impl.UserServiceImpl;
 
 import java.util.Map;
 
@@ -52,8 +48,6 @@ public class Main {
 
         Author author = new Author("Name", "LastName", "19.12.2019");
 
-        UserService userService = UserServiceImpl.getInstance();
-
         User karolek = User.builder()
                 .name("Karolak")
                 .lastname("Worek")
@@ -64,9 +58,6 @@ public class Main {
                 .gender(Gender.MALE)
                 .role(Role.USER)
                 .build();
-
-        BookService bookService = BookServiceImpl.getInastance();
-        System.out.println(bookService.getBookById(100));
     }
 
     static void printAllUsers() {
