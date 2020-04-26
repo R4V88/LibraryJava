@@ -1,9 +1,9 @@
 package r4v88.validator;
 
-import r4v88.exception.DateOfBirthIsNotValid;
-import r4v88.exception.EmailIsNotValid;
-import r4v88.exception.LoginIsNotValid;
-import r4v88.exception.PasswordIsNotValid;
+import r4v88.exception.user.DateOfBirthIsNotValidException;
+import r4v88.exception.user.EmailIsNotValidException;
+import r4v88.exception.user.LoginIsNotValidException;
+import r4v88.exception.user.PasswordIsNotValidException;
 import r4v88.model.User;
 import r4v88.validator.enums.RegexpValidator;
 
@@ -37,18 +37,18 @@ public class UserValidator {
         return date.matches(RegexpValidator.DATE_VALIDATOR.getRegexp());
     }
 
-    public boolean isUserValid(User user) throws LoginIsNotValid, PasswordIsNotValid, EmailIsNotValid, DateOfBirthIsNotValid {
+    public boolean isUserValid(User user) throws LoginIsNotValidException, PasswordIsNotValidException, EmailIsNotValidException, DateOfBirthIsNotValidException {
         if (!isLoginValid(user.getLogin())) {
-            throw new LoginIsNotValid(user.getName() + " your login is too short! (Min. 6 characters)");
+            throw new LoginIsNotValidException(user.getName() + " your login is too short! (Min. 6 characters)");
         }
         if (!isPasswordValid(user.getPassword())) {
-            throw new PasswordIsNotValid(user.getName() + " your password is not valid!");
+            throw new PasswordIsNotValidException(user.getName() + " your password is not valid!");
         }
         if (!isEmailValid(user.getEmail())) {
-            throw new EmailIsNotValid(user.getName() + " your email is not valid!");
+            throw new EmailIsNotValidException(user.getName() + " your email is not valid!");
         }
         if (!isDateOfBirthValid(user.getDateOfBirth())) {
-            throw new DateOfBirthIsNotValid(user.getName() + " your date of your birth is not valid!");
+            throw new DateOfBirthIsNotValidException(user.getName() + " your date of your birth is not valid!");
         }
 
         return true;

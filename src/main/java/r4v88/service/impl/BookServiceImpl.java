@@ -2,6 +2,8 @@ package r4v88.service.impl;
 
 import r4v88.dao.BookDao;
 import r4v88.dao.impl.BookDaoImpl;
+import r4v88.exception.book.BookAlreadyExistException;
+import r4v88.exception.book.BookWithIdDoesNotExistException;
 import r4v88.model.Book;
 import r4v88.service.BookService;
 
@@ -29,26 +31,46 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book getBookById(long id) {
         Book book = null;
-        for (Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()) {
-            if (bookFromDB.getKey() == id) {
-                book = bookFromDB.getValue();
+            for (Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()) {
+                if (bookFromDB.getKey() == id) {
+                    book = bookFromDB.getValue();
+                } else {
+                    throw new BookWithIdDoesNotExistException("Book with id: " + id + " does not exist");
+                }
             }
-        }
-        return book;
+            return book;
     }
 
     @Override
     public void addBook(Book book) {
-        bookDao.addBook(book);
+        for (Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()) {
+            if(!bookFromDB.getValue().equals(book)) {
+                bookDao.addBook(book);
+            } else {
+                throw new BookAlreadyExistException("Book: " + book.getTitle() + " already exists!");
+            }
+        }
     }
 
     @Override
     public void removeBook(long id) {
-        bookDao.removeBook(id);
+        for(Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()){
+            if(bookFromDB.getKey() == id) {
+                bookDao.removeBook(id);
+            } else {
+                throw new BookWithIdDoesNotExistException("Book with id: " + id + " does not exist!");
+            }
+        }
     }
 
     @Override
     public void borrowBook(long id, boolean borrow) {
-        bookDao.borrowBook(id, borrow);
+        for(Map.Entry<Long, Book> bookFromDB : idBookMap.entrySet()){
+            if(!bookFromDB.getValue().isBorrowed()) {
+                bookDao.borrowBook(id, borrow);
+            } else {
+                throw new RuntimeException("Book " + bookFromDB.getValue().getTitle() + " is already borrowed :'(");
+            }
+        }
     }
 }

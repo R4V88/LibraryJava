@@ -2,6 +2,7 @@ package r4v88.service.impl;
 
 import r4v88.dao.AuthorDao;
 import r4v88.dao.impl.AuthorDaoImpl;
+import r4v88.exception.author.*;
 import r4v88.model.Author;
 import r4v88.service.AuthorService;
 
@@ -34,6 +35,8 @@ public class AuthorServiceImpl implements AuthorService {
         for (Map.Entry<Long, Author> authorFromMap : idAuthorsMap.entrySet()) {
             if (authorFromMap.getKey() == id) {
                 author = authorFromMap.getValue();
+            } else {
+                throw new AuthorWithIdDoesNotExistException("Author with id: " + id + " does not exist!");
             }
         }
         return author;
@@ -45,6 +48,8 @@ public class AuthorServiceImpl implements AuthorService {
         for (Map.Entry<Long, Author> authorFromMap : idAuthorsMap.entrySet()) {
             if (authorFromMap.getValue().getName().equals(name)) {
                 author = authorFromMap.getValue();
+            } else {
+                throw new AuthorWithNameDoesNotExistException("Author with name: " + name + " does not exist!");
             }
         }
         return author;
@@ -56,6 +61,8 @@ public class AuthorServiceImpl implements AuthorService {
         for (Map.Entry<Long, Author> authorFromMap : idAuthorsMap.entrySet()) {
             if (authorFromMap.getValue().getLastname().equals(lastname)) {
                 author = authorFromMap.getValue();
+            } else {
+                throw new AuthorWithLastnameDoesNotExistException("Author with lastname: " + lastname + " does not exist!");
             }
         }
         return author;
@@ -63,11 +70,23 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void addAuthor(Author author) {
-        authorDao.addAuthor(author);
+        for (Map.Entry<Long, Author> authorFromMap : idAuthorsMap.entrySet()) {
+            if(!authorFromMap.getValue().equals(author)) {
+                authorDao.addAuthor(author);
+            } else {
+                throw new AuthorAlreadyExistException("Author: " + author.getName() + " already exist!");
+            }
+        }
     }
 
     @Override
-    public void removeAuthorById(Long id) {
-        authorDao.removeAuthorById(id);
+    public void removeAuthorById(long id) {
+        for (Map.Entry<Long, Author> authorFromMap : idAuthorsMap.entrySet()) {
+            if (authorFromMap.getKey() == id) {
+                authorDao.removeAuthorById(id);
+            } else {
+                throw new AuthorWithIdDoesNotExistException("Author with id: " + id + " does not exist!");
+            }
+        }
     }
 }
