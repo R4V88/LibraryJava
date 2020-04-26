@@ -13,7 +13,7 @@ import r4v88.service.impl.UserServiceImpl;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws UserWithIdDoesNotExist, UserWithNameAndLastNameDoesNotExist, UserWithEmailDoesNotExist, UserWithLoginEmailAlreadyExist, DateOfBirthIsNotValid, LoginIsNotValid, PasswordIsNotValid, EmailIsNotValid, UserWithLoginDoesNotExist {
+    public static void main(String[] args) throws UserWithIdDoesNotExistException, UserWithNameAndLastNameDoesNotExistException, UserWithEmailDoesNotExistException, UserWithLoginEmailAlreadyExistException, DateOfBirthIsNotValidException, LoginIsNotValidException, PasswordIsNotValidException, EmailIsNotValidException, UserWithLoginDoesNotExistException {
         User wacek = User.builder()
                 .name("tak")
                 .lastname("nie")

@@ -1,11 +1,11 @@
 package r4v88.exception;
 
-public class LoginIsNotValid extends RuntimeException {
-    public LoginIsNotValid(String message) {
+public class LoginIsNotValidException extends RuntimeException {
+    public LoginIsNotValidException(String message) {
         super(message);
     }
 
-    public LoginIsNotValid() {
+    public LoginIsNotValidException() {
         super();
     }
 }

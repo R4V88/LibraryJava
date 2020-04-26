@@ -1,11 +1,11 @@
 package r4v88.exception;
 
-public class DateOfBirthIsNotValid extends RuntimeException {
-    public DateOfBirthIsNotValid(String message) {
+public class DateOfBirthIsNotValidException extends RuntimeException {
+    public DateOfBirthIsNotValidException(String message) {
         super(message);
     }
 
-    public DateOfBirthIsNotValid() {
+    public DateOfBirthIsNotValidException() {
         super();
     }
 }

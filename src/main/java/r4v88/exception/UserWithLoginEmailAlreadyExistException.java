@@ -1,12 +1,12 @@
 package r4v88.exception;
 
-public class UserWithLoginEmailAlreadyExist extends RuntimeException {
+public class UserWithLoginEmailAlreadyExistException extends RuntimeException {
 
-    public UserWithLoginEmailAlreadyExist(String message) {
+    public UserWithLoginEmailAlreadyExistException(String message) {
         super(message);
     }
 
-    public UserWithLoginEmailAlreadyExist() {
+    public UserWithLoginEmailAlreadyExistException() {
         super();
     }
 }

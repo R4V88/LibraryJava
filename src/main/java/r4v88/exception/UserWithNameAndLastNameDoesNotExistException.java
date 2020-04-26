@@ -1,11 +1,11 @@
 package r4v88.exception;
 
-public class UserWithNameAndLastNameDoesNotExist extends RuntimeException {
-    public UserWithNameAndLastNameDoesNotExist(String message) {
+public class UserWithNameAndLastNameDoesNotExistException extends RuntimeException {
+    public UserWithNameAndLastNameDoesNotExistException(String message) {
         super(message);
     }
 
-    public UserWithNameAndLastNameDoesNotExist() {
+    public UserWithNameAndLastNameDoesNotExistException() {
         super();
     }
 }

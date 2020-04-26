@@ -1,11 +1,11 @@
 package r4v88.exception;
 
-public class UserWithIdDoesNotExist extends RuntimeException {
-    public UserWithIdDoesNotExist(String message) {
+public class UserWithIdDoesNotExistException extends RuntimeException {
+    public UserWithIdDoesNotExistException(String message) {
         super(message);
     }
 
-    public UserWithIdDoesNotExist() {
+    public UserWithIdDoesNotExistException() {
         super();
     }
 }

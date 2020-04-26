@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User getUserById(long id) throws UserWithIdDoesNotExist {
+    public User getUserById(long id) throws UserWithIdDoesNotExistException {
         User user = null;
         if (isUserWithIdExist(id)) {
             for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
@@ -55,13 +55,13 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } else {
-            throw new UserWithIdDoesNotExist("User with id = " + id + " doesnt exist!");
+            throw new UserWithIdDoesNotExistException("User with id = " + id + " doesnt exist!");
         }
         return user;
     }
 
     @Override
-    public User getUserByNameAndLastname(String name, String lastname) throws UserWithNameAndLastNameDoesNotExist {
+    public User getUserByNameAndLastname(String name, String lastname) throws UserWithNameAndLastNameDoesNotExistException {
         User user = null;
         if (isUserWithNameAndLastnameExist(name, lastname)) {
             for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
@@ -70,13 +70,13 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } else {
-            throw new UserWithNameAndLastNameDoesNotExist("User with name: " + name + " and lastname: " + lastname + " doesnt not exist");
+            throw new UserWithNameAndLastNameDoesNotExistException("User with name: " + name + " and lastname: " + lastname + " doesnt not exist");
         }
         return user;
     }
 
     @Override
-    public User getUserByEmail(String email) throws UserWithEmailDoesNotExist {
+    public User getUserByEmail(String email) throws UserWithEmailDoesNotExistException {
         User user;
 
         if (isUserWithEmailExist(email)) {
@@ -87,13 +87,13 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } else {
-            throw new UserWithEmailDoesNotExist("User with email = " + email + " does not exist!");
+            throw new UserWithEmailDoesNotExistException("User with email = " + email + " does not exist!");
         }
         return null;
     }
 
     @Override
-    public User getUserByLogin(String login) throws UserWithLoginDoesNotExist {
+    public User getUserByLogin(String login) throws UserWithLoginDoesNotExistException {
         User user;
 
         if (isUserWithLoginExist(login)) {
@@ -104,31 +104,31 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } else {
-            throw new UserWithLoginDoesNotExist("User with login: " + login + " does not exist!");
+            throw new UserWithLoginDoesNotExistException("User with login: " + login + " does not exist!");
         }
         return null;
     }
 
     @Override
-    public void createUser(User user) throws UserWithLoginEmailAlreadyExist, DateOfBirthIsNotValid, LoginIsNotValid, PasswordIsNotValid, EmailIsNotValid {
+    public void createUser(User user) throws UserWithLoginEmailAlreadyExistException, DateOfBirthIsNotValidException, LoginIsNotValidException, PasswordIsNotValidException, EmailIsNotValidException {
         if (!isUserWithLoginExist(user.getLogin()) && !isUserWithEmailExist(user.getEmail()) && userValidator.isUserValid(user)) {
             userDao.insertUser(user);
         } else {
-            throw new UserWithLoginEmailAlreadyExist("User with login: " + user.getLogin() + " and email: " + user.getEmail() + " already exist!");
+            throw new UserWithLoginEmailAlreadyExistException("User with login: " + user.getLogin() + " and email: " + user.getEmail() + " already exist!");
         }
     }
 
     @Override
-    public void removeUserById(long id) throws UserWithIdDoesNotExist {
+    public void removeUserById(long id) throws UserWithIdDoesNotExistException {
         if (isUserWithIdExist(id)) {
             userDao.removeUserById(id);
         } else {
-            throw new UserWithIdDoesNotExist("User with id = " + id + " doesnt exist!");
+            throw new UserWithIdDoesNotExistException("User with id = " + id + " doesnt exist!");
         }
     }
 
     @Override
-    public void removeUserByLogin(String login) throws UserWithLoginDoesNotExist {
+    public void removeUserByLogin(String login) throws UserWithLoginDoesNotExistException {
         if (isUserWithLoginExist(login)) {
             for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
                 if (login.equals(users.getValue().getLogin())) {
@@ -136,12 +136,12 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } else {
-            throw new UserWithLoginDoesNotExist("User with login: " + login + " does not exist!");
+            throw new UserWithLoginDoesNotExistException("User with login: " + login + " does not exist!");
         }
     }
 
     @Override
-    public void removeUserByEmail(String email) throws UserWithEmailDoesNotExist {
+    public void removeUserByEmail(String email) throws UserWithEmailDoesNotExistException {
         if (isUserWithEmailExist(email)) {
             for (Map.Entry<Long, User> users : idUserMap.entrySet()) {
                 if (email.equals(users.getValue().getEmail())) {
@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } else {
-            throw new UserWithEmailDoesNotExist("User with email = " + email + " does not exist!");
+            throw new UserWithEmailDoesNotExistException("User with email = " + email + " does not exist!");
         }
     }
 
@@ -164,29 +164,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserLogin(String login, long id) throws LoginIsNotValid {
+    public void updateUserLogin(String login, long id) throws LoginIsNotValidException {
         if (userValidator.isLoginValid(login)) {
             userDao.updateUserLogin(login, id);
         } else {
-            throw new LoginIsNotValid("Login is not valid!");
+            throw new LoginIsNotValidException("Login is not valid!");
         }
     }
 
     @Override
-    public void updateUserEmail(String email, long id) throws EmailIsNotValid {
+    public void updateUserEmail(String email, long id) throws EmailIsNotValidException {
         if (userValidator.isEmailValid(email)) {
             userDao.updateUserEmail(email, id);
         } else {
-            throw new EmailIsNotValid("Email is not valid!");
+            throw new EmailIsNotValidException("Email is not valid!");
         }
     }
 
     @Override
-    public void updateUserPassword(String password, long id) throws PasswordIsNotValid {
+    public void updateUserPassword(String password, long id) throws PasswordIsNotValidException {
         if (userValidator.isPasswordValid(password)) {
             userDao.updateUserPassword(password, id);
         } else {
-            throw new PasswordIsNotValid("Password is not valid!");
+            throw new PasswordIsNotValidException("Password is not valid!");
         }
     }
 
