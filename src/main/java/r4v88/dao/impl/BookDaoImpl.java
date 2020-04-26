@@ -1,6 +1,6 @@
-package r4v88.dao;
+package r4v88.dao.impl;
 
-import r4v88.api.BookDao;
+import r4v88.dao.BookDao;
 import r4v88.model.Book;
 import r4v88.model.enums.Type;
 import r4v88.model.parser.BookParser;

@@ -1,8 +1,8 @@
 package r4v88;
 
-import r4v88.api.BookDao;
-import r4v88.api.UserService;
-import r4v88.dao.BookDaoImpl;
+import r4v88.dao.BookDao;
+import r4v88.service.UserService;
+import r4v88.dao.impl.BookDaoImpl;
 import r4v88.exception.*;
 import r4v88.model.Author;
 import r4v88.model.Book;
@@ -10,7 +10,7 @@ import r4v88.model.User;
 import r4v88.model.enums.Gender;
 import r4v88.model.enums.Role;
 import r4v88.model.enums.Type;
-import r4v88.service.UserServiceImpl;
+import r4v88.service.impl.UserServiceImpl;
 
 import java.util.Map;
 
@@ -48,8 +48,6 @@ public class Main {
                 .build();
 
 
-//        System.out.println(book.getId());
-
         Author author = new Author("Name", "LastName", "19.12.2019");
 
         UserService userService = UserServiceImpl.getInstance();
@@ -64,41 +62,11 @@ public class Main {
                 .gender(Gender.MALE)
                 .role(Role.USER)
                 .build();
-//        userService.createUser(karolek);
-////        userService.createUser(marek);
-////        userService.createUser(wacek);
 
-//        userService.updateUserName("Czarek", 1);
-//        userService.updateUserLogin("loginbbc", 1);
-//        userService.updateUserEmail("1232@3123", 1);
-//        userService.updateUserLastname("Nazwisko", 1);
-//        userService.updateUserPassword("asli!jdD1", 1);
-//        userService.createUser(new User.Builder()
-//                .setLogin("Korek123")
-//                .setLastname("Dębowy")
-//                .setEmail("napisz@tutaj")
-//                .setPassword("asli*jdD2")
-//                .setDateOfBirth("11.11.2011")
-//                .setName("Korek")
-//                .setGender(Gender.MALE)
-//                .build());
         printAllUsers();
-//        userService.removeUserByLogin("Korek123");
-//        printAllUsers();
-
-//        userService.updateUserName("kutalak", 6);
-//        printAllUsers();
-
-//        System.out.println(RegexpValidator.MIN_LENGTH_LOGIN.getRegexp());
-
-
-//        System.out.println(userService.getAllUsers().toString());
-//        System.out.println(userService.getUserByEmail("imejl.123"));
 
         BookDao bookDao = BookDaoImpl.getInstance();
         bookDao.addBook(book);
-//            bookDao.borrowBook(1, false);
-        bookDao.removeBook(1);
     }
 
     static void printAllUsers() {
