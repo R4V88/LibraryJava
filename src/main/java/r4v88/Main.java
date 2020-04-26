@@ -1,21 +1,20 @@
 package r4v88;
 
-import r4v88.dao.BookDao;
+import r4v88.service.AuthorService;
 import r4v88.service.UserService;
-import r4v88.dao.impl.BookDaoImpl;
-import r4v88.exception.*;
 import r4v88.model.Author;
 import r4v88.model.Book;
 import r4v88.model.User;
 import r4v88.model.enums.Gender;
 import r4v88.model.enums.Role;
 import r4v88.model.enums.Type;
+import r4v88.service.impl.AuthorServiceImpl;
 import r4v88.service.impl.UserServiceImpl;
 
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws UserWithIdDoesNotExist, UserWithNameAndLastNameDoesNotExist, UserWithEmailDoesNotExist, UserWithLoginEmailAlreadyExist, DateOfBirthIsNotValid, LoginIsNotValid, PasswordIsNotValid, EmailIsNotValid, UserWithLoginDoesNotExist {
+    public static void main(String[] args) {
         User wacek = User.builder()
                 .name("tak")
                 .lastname("nie")
@@ -38,7 +37,6 @@ public class Main {
                 .role(Role.ADMIN)
                 .build();
 
-
         Book book = Book.builder()
                 .title("title")
                 .isbn(123124123)
@@ -47,10 +45,8 @@ public class Main {
                 .type(Type.COMEDY)
                 .build();
 
-
+        Author ken = new Author("Ken", "Follet", "19.08.1947");
         Author author = new Author("Name", "LastName", "19.12.2019");
-
-        UserService userService = UserServiceImpl.getInstance();
 
         User karolek = User.builder()
                 .name("Karolak")
@@ -63,10 +59,15 @@ public class Main {
                 .role(Role.USER)
                 .build();
 
-        printAllUsers();
-
-        BookDao bookDao = BookDaoImpl.getInstance();
-        bookDao.addBook(book);
+        User korek = User.builder()
+                .login("Korek123")
+                .lastname("Dębowy")
+                .email("napisz@tutaj")
+                .password("asli*jdD2")
+                .dateOfBirth("11.11.2011")
+                .name("Korek")
+                .gender(Gender.MALE)
+                .build();
     }
 
     static void printAllUsers() {
@@ -74,6 +75,14 @@ public class Main {
         Map<Long, User> longUserMap = userService.getAllUsers();
         for (Map.Entry<Long, User> longUserEntry : longUserMap.entrySet()) {
             System.out.println(longUserEntry.getKey() + " " + longUserEntry.getValue());
+        }
+    }
+
+    static void printAllAuthors() {
+        AuthorService userService = AuthorServiceImpl.getInstance();
+        Map<Long, Author> longAuthorMap = userService.getAllAuthors();
+        for (Map.Entry<Long, Author> longAuthorEntry : longAuthorMap.entrySet()) {
+            System.out.println(longAuthorEntry.getKey() + " " + longAuthorEntry.getValue());
         }
     }
 }
